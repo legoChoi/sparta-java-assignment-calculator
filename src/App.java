@@ -1,15 +1,15 @@
 import java.util.Scanner;
 
-public class Main {
+// LV 1 계산기
+public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int firstNum, secondNum;
-        double result;
         String operator;
+        double result;
 
         while (true) {
-            System.out.println();
-            System.out.println("양의 정수(0 포함)를 입력하세요.");
+            System.out.println("\n양의 정수(0 포함)를 입력하세요.");
             System.out.print("첫번째 정수: ");
             firstNum = sc.nextInt();
 
@@ -50,7 +50,6 @@ public class Main {
             }
 
             System.out.println("결과: " + result);
-
             System.out.println("\n종료: exit 입력");
 
             if (sc.next().equals("exit")) break;
