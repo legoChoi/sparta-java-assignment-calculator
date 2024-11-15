@@ -21,6 +21,11 @@ public class ArithmeticCalculator{
                 System.out.println(result);
                 break;
 
+            case SQUARE:
+                result = Math.pow(first, second);
+                System.out.println(result);
+                break;
+
             case DIVIDE:
                 if ( second == 0 ) throw new ArithmeticException("Divide by zero");
 

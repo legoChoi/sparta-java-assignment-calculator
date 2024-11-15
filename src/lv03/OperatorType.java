@@ -6,6 +6,7 @@ public enum OperatorType {
     PLUS("+"),
     MINUS("-"),
     MULTIPLY("*"),
+    SQUARE("**"),
     DIVIDE("/"),
     MOD("%");
 

@@ -23,6 +23,6 @@ public class CalculationMenu {
 
     public void showOperatorInputRequestView() {
         System.out.println("---------------------");
-        System.out.println("연산자 입력(+, -, *, /, %)");
+        System.out.println("연산자 입력(+, -, *, **, /, %)");
     }
 }
