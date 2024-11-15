@@ -1,4 +1,4 @@
-package lv03;
+package lv03.enums;
 
 import java.util.Arrays;
 

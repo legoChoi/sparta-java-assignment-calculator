@@ -1,6 +1,7 @@
 package lv03;
 
-import lv03.calculation.*;
+import lv03.calculations.*;
+import lv03.enums.OperatorType;
 
 public class ArithmeticCalculator{
     public <T extends Number> T calculate(double first, double second, OperatorType operatorType) {
