@@ -7,35 +7,35 @@ public class ArithmeticCalculator{
         double result = 0;
         switch (operatorType) {
             case PLUS:
-                result = first + second;
+                result = new AdditionCalculation().calculate(first, second);
                 System.out.println(result);
                 break;
 
             case MINUS:
-                result = first - second;
+                result = new MinusCalculation().calculate(first, second);
                 System.out.println(result);
                 break;
 
             case MULTIPLY:
-                result = first * second;
+                result = new MultiplyCalculation().calculate(first, second);
                 System.out.println(result);
                 break;
 
             case SQUARE:
-                result = Math.pow(first, second);
+                result = new SquareCalculation().calculate(first, second);
                 System.out.println(result);
                 break;
 
             case DIVIDE:
                 if ( second == 0 ) throw new ArithmeticException("Divide by zero");
 
-                result = first / second;
+                result = new DivideCalculation().calculate(first, second);
                 System.out.println(result);
 
                 break;
 
             case MOD:
-                result = first % second;
+                result = new ModuloCalculation().calculate(first, second);
                 System.out.println(result);
                 break;
 
