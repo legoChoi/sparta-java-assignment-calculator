@@ -1,13 +1,15 @@
 package lv03;
 
-public class CalculationMenu {
+public class CalculationMenu extends Menu {
     private boolean state = true;
 
-    public boolean getState() {
+    @Override
+    public boolean getSatae() {
         return state;
     }
 
-    public void setState(boolean state) {
+    @Override
+    public void setSatae(boolean state) {
         this.state = state;
     }
 

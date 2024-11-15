@@ -15,7 +15,7 @@ public class Calculator {
     }
 
     public void showMainMenu() {
-        while (mainMenu.getState()) {
+        while (mainMenu.getSatae()) {
             mainMenu.showMainMenuView();
             String command = input.input();
             MainMenuCommandLine mainMenuCommandLine = MainMenuCommandLine.find(command);
@@ -31,7 +31,7 @@ public class Calculator {
     }
 
     public void showMemoryMenu() {
-        while (memoryMenu.getState()) {
+        while (memoryMenu.getSatae()) {
             memoryMenu.showMemoryMenuView();
             String command = input.input();
             MemoryMenuCommandLine memoryMenuCommandLine = MemoryMenuCommandLine.find(command);
@@ -43,11 +43,11 @@ public class Calculator {
             }
         }
 
-        memoryMenu.setState(true);
+        memoryMenu.setSatae(true);
     }
 
     public void calculationMenu() {
-        while(calculationMenu.getState()) {
+        while(calculationMenu.getSatae()) {
             try {
                 calculationMenu.showFirstNumberInputRequestView();
                 double inputFirstNum = Double.parseDouble(input.input());
@@ -63,13 +63,13 @@ public class Calculator {
                     // 메모리에 저장
                     memory.save(result);
                 }
-                calculationMenu.setState(false);
+                calculationMenu.setSatae(false);
             } catch (NumberFormatException | NullPointerException e ) {
                 System.out.println("\n다시 입력하세요.\n");
             }
         }
 
-        calculationMenu.setState(true);
+        calculationMenu.setSatae(true);
     }
 
     public void controlMainMenuByCommand(MainMenuCommandLine command) {
@@ -84,7 +84,7 @@ public class Calculator {
                 break;
             case EXIT:
                 // 시스템 종료
-                mainMenu.setState(false);
+                mainMenu.setSatae(false);
                 break;
         }
     }
@@ -114,7 +114,7 @@ public class Calculator {
                 break;
             case BACK:
                 // 메인 메뉴로 돌아가기
-                memoryMenu.setState(false);
+                memoryMenu.setSatae(false);
                 break;
         }
     }

@@ -1,14 +1,16 @@
 package lv03;
 
-public class MemoryMenu {
+public class MemoryMenu extends Menu {
     private boolean state = true;
 
-    public boolean getState() {
+    @Override
+    public boolean getSatae() {
         return state;
     }
 
-    public void setState(boolean mainMenuState) {
-        this.state = mainMenuState;
+    @Override
+    public void setSatae(boolean state) {
+        this.state = state;
     }
 
     public void showMemoryMenuView() {
