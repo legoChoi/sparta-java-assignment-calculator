@@ -1,38 +1,56 @@
 package lv03;
 
-import java.util.LinkedList;
+import java.util.Arrays;
 
 public class ArithmeticCalculator{
-    private double result;
-    private Memory mem;
+    private boolean state = true;
 
-    public double calculate(String operator, int first, int second) {
+    public boolean getState() {
+        return state;
+    }
 
-        switch (operator) {
-            case "+":
+    public void setState(boolean state) {
+        this.state = state;
+    }
+
+    public <T extends Number> T calculate(double first, double second, OperatorType operatorType) {
+        double result = 0;
+        switch (operatorType) {
+            case PLUS:
                 result = first + second;
-                return result;
+                System.out.println(result);
+                break;
 
-            case "-":
+            case MINUS:
                 result = first - second;
-                return result;
+                System.out.println(result);
+                break;
 
-            case "*":
+            case MULTIPLY:
                 result = first * second;
-                return result;
+                System.out.println(result);
+                break;
 
-            case "/":
+            case DIVIDE:
                 try {
                     result = first / second;
+                    System.out.println(result);
                 } catch (ArithmeticException e) {
                     System.out.println(e.getMessage());
+                    return null;
                 }
+                break;
 
-                return result;
+            case MOD:
+                result = first % second;
+                System.out.println(result);
+                break;
 
             default:
                 System.out.println("잘못된 연산자 입력 됨");
-                return -1;
+                return null;
         }
+
+        return (T) Double.valueOf(result);
     }
 }
