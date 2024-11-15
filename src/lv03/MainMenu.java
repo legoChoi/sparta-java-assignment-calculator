@@ -1,6 +1,6 @@
 package lv03;
 
-public class Menu {
+public class MainMenu {
     private boolean state = true;
 
     public boolean getState() {
@@ -12,10 +12,9 @@ public class Menu {
     }
 
     public void showMainMenuView() {
-        System.out.println("---------------------");
+        System.out.println("\n---------------------");
         System.out.println("1. 계산 >> calculate");
         System.out.println("2. 메모리 >> memory");
         System.out.println("3. 종료 >> exit");
-        System.out.print(">> ");
     }
 }
