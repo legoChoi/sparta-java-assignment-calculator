@@ -1,4 +1,4 @@
-package lv03;
+package lv03.calculation;
 
 public class DivideCalculation implements Calculation {
     @Override
