@@ -1,5 +1,7 @@
 package lv03;
 
+import java.nio.file.NotLinkException;
+
 public class Calculator {
     private Input input = new Input();
     private Memory memory = new Memory();
@@ -18,12 +20,10 @@ public class Calculator {
             String command = input.input();
             MainMenuCommandLine mainMenuCommandLine = MainMenuCommandLine.find(command);
 
-            if (mainMenuCommandLine == null) continue;
-
             try {
                 controlMainMenuByCommand(mainMenuCommandLine);
-            } catch (BadCommandLineInputException e) {
-                e.getMessage();
+            } catch (NullPointerException e) {
+                System.out.println("\n다시 입력하세요.");
             }
         }
 
@@ -36,12 +36,10 @@ public class Calculator {
             String command = input.input();
             MemoryMenuCommandLine memoryMenuCommandLine = MemoryMenuCommandLine.find(command);
 
-            if (memoryMenuCommandLine == null) continue;
-
             try {
                 controlMemoryByCommand(memoryMenuCommandLine);
-            } catch (BadCommandLineInputException e) {
-                e.getMessage();
+            } catch (NullPointerException e) {
+                System.out.println("\n다시 입력하세요.");
             }
         }
 
@@ -49,24 +47,29 @@ public class Calculator {
     }
 
     public void calculationMenu() {
-        try {
-            calculationMenu.showFirstNumberInputRequestView();
-            double inputFirstNum = Double.parseDouble(input.input());
+        while(calculationMenu.getState()) {
+            try {
+                calculationMenu.showFirstNumberInputRequestView();
+                double inputFirstNum = Double.parseDouble(input.input());
 
-            calculationMenu.showSecondNumberInputRequestView();
-            double inputSecondNum = Double.parseDouble(input.input());;
+                calculationMenu.showSecondNumberInputRequestView();
+                double inputSecondNum = Double.parseDouble(input.input());;
 
-            calculationMenu.showOperatorInputRequestView();
-            OperatorType inputOperatorType = OperatorType.find(input.input());
+                calculationMenu.showOperatorInputRequestView();
+                OperatorType inputOperatorType = OperatorType.find(input.input());
 
-            Double result = arithmeticCalculator.calculate(inputFirstNum, inputSecondNum, inputOperatorType);
-            if (result != null) {
-                // 메모리에 저장
-                memory.save(result);
+                Double result = arithmeticCalculator.calculate(inputFirstNum, inputSecondNum, inputOperatorType);
+                if (result != null) {
+                    // 메모리에 저장
+                    memory.save(result);
+                }
+                calculationMenu.setState(false);
+            } catch (NumberFormatException | NullPointerException e ) {
+                System.out.println("\n다시 입력하세요.\n");
             }
-        } catch (NumberFormatException e) {
-            e.getMessage();
         }
+
+        calculationMenu.setState(true);
     }
 
     public void controlMainMenuByCommand(MainMenuCommandLine command) {
