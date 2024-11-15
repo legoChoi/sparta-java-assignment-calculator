@@ -1,4 +1,4 @@
-package lv03;
+package lv03.exceptions;
 
 public class BadNumberInputException extends NumberFormatException {
     public BadNumberInputException() {
