@@ -1,4 +1,4 @@
-package lv03;
+package lv03.menus;
 
 public class CalculationMenu extends Menu {
     private boolean state = true;

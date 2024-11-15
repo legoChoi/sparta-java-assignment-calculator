@@ -1,4 +1,4 @@
-package lv03.calculation;
+package lv03.calculations;
 
 public class AdditionCalculation implements Calculation {
     @Override

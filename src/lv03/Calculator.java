@@ -1,9 +1,16 @@
 package lv03;
 
-import java.nio.file.NotLinkException;
+import lv03.Input.CalculatorInput;
+import lv03.Input.Input;
+import lv03.enums.MainMenuCommandLine;
+import lv03.enums.MemoryMenuCommandLine;
+import lv03.enums.OperatorType;
+import lv03.menus.CalculationMenu;
+import lv03.menus.MainMenu;
+import lv03.menus.MemoryMenu;
 
 public class Calculator {
-    private Input input = new Input();
+    private Input input = new CalculatorInput();
     private Memory memory = new Memory();
     private MainMenu mainMenu = new MainMenu();
     private MemoryMenu memoryMenu = new MemoryMenu();
