@@ -1,10 +1,13 @@
 package lv03;
 
+import java.util.Arrays;
+
 public enum OperatorType {
     PLUS("+"),
     MINUS("-"),
     MULTIPLY("*"),
-    DIVIDE("/");
+    DIVIDE("/"),
+    MOD("%");
 
     private String operator;
 
@@ -12,11 +15,14 @@ public enum OperatorType {
         this.operator = operator;
     }
 
-    public void runByMenu() {
-
-    }
-
     public String getOperator() {
         return operator;
+    }
+
+    public static OperatorType find(String operator) {
+        return Arrays.stream(values())
+                .filter(v -> v.operator.equals(operator))
+                .findAny()
+                .orElse(null);
     }
 }

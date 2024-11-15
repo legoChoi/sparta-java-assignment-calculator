@@ -6,14 +6,6 @@ import java.util.Scanner;
 public class Memory<T> {
     private LinkedList<T> resultList = new LinkedList<>();
 
-    public boolean test() {
-        Scanner sc = new Scanner(System.in);
-        int answer = sc.nextInt();
-        System.out.println(answer);
-
-        return answer == 0;
-    }
-
     public LinkedList<T> getResultList() {
         return resultList;
     }

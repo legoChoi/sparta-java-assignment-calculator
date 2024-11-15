@@ -2,7 +2,10 @@ package lv03;
 
 public class Calculator {
     Input input = new Input();
+    Memory memory = new Memory();
     Menu menu = new Menu();
+    MemoryMenu memoryMenu = new MemoryMenu();
+    CalculationMenu calculationMenu = new CalculationMenu();
     ArithmeticCalculator arithmeticCalculator = new ArithmeticCalculator();
 
     public void run() {
@@ -10,8 +13,8 @@ public class Calculator {
     }
 
     public void showMainMenu() {
-        while (menu.getMainMenuState()) {
-            menu.showMainMenu();
+        while (menu.getState()) {
+            menu.showMainMenuView();
             String command = input.input();
             MainMenuCommandLine mainMenuCommandLine = MainMenuCommandLine.find(command);
             controlMainMenuByCommand(mainMenuCommandLine);
@@ -21,20 +24,36 @@ public class Calculator {
     }
 
     public void showMemoryMenu() {
-        while (menu.getMemoryMenuState()) {
-            menu.showMemorymenu();
+        while (memoryMenu.getState()) {
+            memoryMenu.showMemoryMenuView();
             String command = input.input();
             MemoryMenuCommandLine memoryMenuCommandLine = MemoryMenuCommandLine.find(command);
             controlMemoryByCommand(memoryMenuCommandLine);
         }
 
-        menu.setMemoryMenuState(true);
+        memoryMenu.setState(true);
+    }
+
+    public void calculationMenu() {
+        calculationMenu.showFirstNumberInputRequestView();
+        double inputFirstNum = Double.parseDouble(input.input());
+        calculationMenu.showSecondNumberInputRequestView();
+        double inputSecondNum = Double.parseDouble(input.input());;
+        calculationMenu.showOperatorInputRequestView();
+        OperatorType inputOperatorType = OperatorType.find(input.input());
+
+        Double result = arithmeticCalculator.calculate(inputFirstNum, inputSecondNum, inputOperatorType);
+        if (result != null) {
+            // 메모리에 저장
+            memory.save(result);
+        }
     }
 
     public void controlMainMenuByCommand(MainMenuCommandLine command) {
         switch (command) {
             case CALCULATE:
-                // AritheMetic Calculator 계산
+                // Arithmetic Calculator 계산 진행
+                calculationMenu();
                 break;
             case MEMORY:
                 // 메모리 메뉴로 이동
@@ -42,7 +61,7 @@ public class Calculator {
                 break;
             case EXIT:
                 // 시스템 종료
-                menu.setMainMenuState(false);
+                menu.setState(false);
                 break;
             default:
                 break;
@@ -65,7 +84,7 @@ public class Calculator {
                 break;
             case BACK:
                 // 메인 메뉴로 돌아가기
-                menu.setMemoryMenuState(false);
+                memoryMenu.setState(false);
                 break;
             default:
                 break;
