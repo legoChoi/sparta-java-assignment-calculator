@@ -3,16 +3,6 @@ package lv03;
 import java.util.Arrays;
 
 public class ArithmeticCalculator{
-    private boolean state = true;
-
-    public boolean getState() {
-        return state;
-    }
-
-    public void setState(boolean state) {
-        this.state = state;
-    }
-
     public <T extends Number> T calculate(double first, double second, OperatorType operatorType) {
         double result = 0;
         switch (operatorType) {
@@ -32,13 +22,11 @@ public class ArithmeticCalculator{
                 break;
 
             case DIVIDE:
-                try {
-                    result = first / second;
-                    System.out.println(result);
-                } catch (ArithmeticException e) {
-                    System.out.println(e.getMessage());
-                    return null;
-                }
+                if ( second == 0 ) throw new ArithmeticException("Divide by zero");
+
+                result = first / second;
+                System.out.println(result);
+
                 break;
 
             case MOD:

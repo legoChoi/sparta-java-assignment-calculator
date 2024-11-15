@@ -7,6 +7,7 @@ public class Input {
     private OperatorType operatorType;
 
     public String input() {
+        System.out.print(">> ");
         return sc.nextLine();
     }
 

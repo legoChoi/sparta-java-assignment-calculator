@@ -14,18 +14,15 @@ public class CalculationMenu {
     public void showFirstNumberInputRequestView() {
         System.out.println("---------------------");
         System.out.println("첫 번째 숫자 입력");
-        System.out.print(">> ");
     }
 
     public void showSecondNumberInputRequestView() {
         System.out.println("---------------------");
         System.out.println("두 번째 숫자 입력");
-        System.out.print(">> ");
     }
 
     public void showOperatorInputRequestView() {
         System.out.println("---------------------");
         System.out.println("연산자 입력(+, -, *, /, %)");
-        System.out.print(">> ");
     }
 }
