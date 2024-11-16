@@ -15,7 +15,6 @@ import lv03.menus.CalculationMenu;
 import lv03.menus.MainMenu;
 import lv03.menus.MemoryMenu;
 import lv03.menus.Menu;
-import lv03.validator.*;
 
 public class Calculator {
     private final Menu mainMenu;
@@ -84,10 +83,8 @@ public class Calculator {
                 calculationMenu.showOperatorInputRequestView();
                 String inputOperator = calculatorInput.input();
 
-                OperatorType inputOperatorType = OperatorType.find(inputOperator);
-
                 // 연산
-                double result = arithmeticCalculator.calculate(new CalculatorInputDto(inputFirstOperand, inputSecondOperand, inputOperatorType));
+                double result = arithmeticCalculator.calculate(new CalculatorInputDto(inputFirstOperand, inputSecondOperand, inputOperator));
 
                 // 메모리에 저장
                 if (!Double.isNaN(result)) {
@@ -96,8 +93,6 @@ public class Calculator {
                 }
 
                 calculationMenu.setState(false); // 반복 해제
-            } catch (NotValidOperatorInputException e) {
-                System.out.println(e.getMessage());
             } catch (NumberFormatException e) {
                 System.out.println(ExceptionMessage.NOT_VALID_OPERAND_INPUT_EXCEPTION.getMessage());
             }
