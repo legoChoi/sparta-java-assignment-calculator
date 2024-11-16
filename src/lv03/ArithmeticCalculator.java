@@ -1,22 +1,23 @@
 package lv03;
 
 import lv03.calculations.*;
+import lv03.dto.CalculatorInputDto;
 import lv03.enums.ExceptionMessage;
 import lv03.enums.OperatorType;
 
 public class ArithmeticCalculator{
-    public double calculate(double first, double second, OperatorType operatorType) {
+    public double calculate(CalculatorInputDto calculatorInputDto) {
         double result;
-        switch (operatorType) {
-            case PLUS -> result = new AdditionCalculation().calculate(first, second);
-            case MINUS -> result = new MinusCalculation().calculate(first, second);
-            case MULTIPLY -> result = new MultiplyCalculation().calculate(first, second);
-            case SQUARE -> result = new SquareCalculation().calculate(first, second);
-            case MOD -> result = new ModuloCalculation().calculate(first, second);
+        switch (calculatorInputDto.operator()) {
+            case PLUS -> result = new AdditionCalculation().calculate(calculatorInputDto.firstOperand(), calculatorInputDto.secondOperand());
+            case MINUS -> result = new MinusCalculation().calculate(calculatorInputDto.firstOperand(), calculatorInputDto.secondOperand());
+            case MULTIPLY -> result = new MultiplyCalculation().calculate(calculatorInputDto.firstOperand(), calculatorInputDto.secondOperand());
+            case SQUARE -> result = new SquareCalculation().calculate(calculatorInputDto.firstOperand(), calculatorInputDto.secondOperand());
+            case MOD -> result = new ModuloCalculation().calculate(calculatorInputDto.firstOperand(), calculatorInputDto.secondOperand());
             case DIVIDE -> {
                 try {
-                    if (second == 0) throw new ArithmeticException();
-                    result = new DivideCalculation().calculate(first, second);
+                    if (calculatorInputDto.secondOperand() == 0) throw new ArithmeticException();
+                    result = new DivideCalculation().calculate(calculatorInputDto.firstOperand(), calculatorInputDto.secondOperand());
                     System.out.println(result);
                 } catch (ArithmeticException e) {
                     System.out.println(ExceptionMessage.DIVIDE_BY_ZERO_EXCEPTION.getMessage());
