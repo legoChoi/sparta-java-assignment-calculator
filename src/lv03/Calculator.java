@@ -22,9 +22,6 @@ public class Calculator {
     private final Menu memoryMenu;
     private final CalculationMenu calculationMenu;
     private final Input calculatorInput;
-    private final Validator operatorValidator;
-    private final Validator mainMenuCommandValidator;
-    private final Validator memoryMenuCommandValidator;
     private final ArithmeticCalculator arithmeticCalculator;
     private final Memory memory = new CalculatorMemory<Double>();
 
@@ -33,17 +30,11 @@ public class Calculator {
             MemoryMenu memoryMenu,
             CalculationMenu calculationMenu,
             CalculatorInput calculatorInput,
-            OperatorValidator operatorValidator,
-            MainMenuCommandValidator mainMenuCommandValidator,
-            MemoryMenuCommandValidator memoryMenuCommandValidator,
             ArithmeticCalculator arithmeticCalculator) {
         this.mainMenu = mainMenu;
         this.memoryMenu = memoryMenu;
         this.calculationMenu = calculationMenu;
         this.calculatorInput = calculatorInput;
-        this.operatorValidator = operatorValidator;
-        this.mainMenuCommandValidator = mainMenuCommandValidator;
-        this.memoryMenuCommandValidator = memoryMenuCommandValidator;
         this.arithmeticCalculator = arithmeticCalculator;
 
         showMainMenu();
