@@ -18,17 +18,34 @@ import lv03.menus.Menu;
 import lv03.validator.*;
 
 public class Calculator {
-    private final Menu mainMenu = new MainMenu();
-    private final Menu memoryMenu = new MemoryMenu();
-    private final CalculationMenu calculationMenu = new CalculationMenu();
-    private final Input calculatorInput = new CalculatorInput();
-    private final Memory memory = new CalculatorMemory();
-    private final Validator operatorValidator = new OperatorValidator();
-    private final Validator mainMenuCommandValidator = new MainMenuCommandValidator();
-    private final Validator memoryMenuCommandValidator = new MemoryMenuCommandValidator();
-    private final ArithmeticCalculator arithmeticCalculator = new ArithmeticCalculator();
+    private final Menu mainMenu;
+    private final Menu memoryMenu;
+    private final CalculationMenu calculationMenu;
+    private final Input calculatorInput;
+    private final Validator operatorValidator;
+    private final Validator mainMenuCommandValidator;
+    private final Validator memoryMenuCommandValidator;
+    private final ArithmeticCalculator arithmeticCalculator;
+    private final Memory memory = new CalculatorMemory<Double>();
 
-    public Calculator() {
+    public Calculator(
+            MainMenu mainMenu,
+            MemoryMenu memoryMenu,
+            CalculationMenu calculationMenu,
+            CalculatorInput calculatorInput,
+            OperatorValidator operatorValidator,
+            MainMenuCommandValidator mainMenuCommandValidator,
+            MemoryMenuCommandValidator memoryMenuCommandValidator,
+            ArithmeticCalculator arithmeticCalculator) {
+        this.mainMenu = mainMenu;
+        this.memoryMenu = memoryMenu;
+        this.calculationMenu = calculationMenu;
+        this.calculatorInput = calculatorInput;
+        this.operatorValidator = operatorValidator;
+        this.mainMenuCommandValidator = mainMenuCommandValidator;
+        this.memoryMenuCommandValidator = memoryMenuCommandValidator;
+        this.arithmeticCalculator = arithmeticCalculator;
+
         showMainMenu();
     }
 
@@ -38,8 +55,6 @@ public class Calculator {
             String command = calculatorInput.input();
 
             try {
-                if (!mainMenuCommandValidator.isValid(command)) throw new NotValidCommandInputException();
-
                 MainMenuCommandLine mainMenuCommandLine = MainMenuCommandLine.find(command);
                 controlMainMenuByCommand(mainMenuCommandLine);
             } catch (NotValidCommandInputException e) {
@@ -56,8 +71,6 @@ public class Calculator {
             String command = calculatorInput.input();
 
             try {
-                if (!memoryMenuCommandValidator.isValid(command)) throw new NotValidCommandInputException();
-
                 MemoryMenuCommandLine memoryMenuCommandLine = MemoryMenuCommandLine.find(command);
                 controlMemoryByCommand(memoryMenuCommandLine);
             } catch (NotValidCommandInputException e) {
@@ -79,9 +92,6 @@ public class Calculator {
 
                 calculationMenu.showOperatorInputRequestView();
                 String inputOperator = calculatorInput.input();
-
-                // 연산자 enum 아닌 경우
-                if (!operatorValidator.isValid(inputOperator)) throw new NotValidOperatorInputException();
 
                 OperatorType inputOperatorType = OperatorType.find(inputOperator);
 
@@ -130,7 +140,7 @@ public class Calculator {
                     double target = Double.parseDouble(calculatorInput.input());
                     memory.findBigger(target);
                 } catch (NumberFormatException e) {
-                    e.getMessage();
+                    System.out.println(ExceptionMessage.NOT_VALID_OPERAND_INPUT_EXCEPTION);
                 }
             }
             // 컬렉션 비우기
