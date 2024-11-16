@@ -2,20 +2,23 @@ package lv03;
 
 import lv03.Input.CalculatorInput;
 import lv03.Input.Input;
+import lv03.Memory.CalculatorMemory;
+import lv03.Memory.Memory;
 import lv03.enums.MainMenuCommandLine;
 import lv03.enums.MemoryMenuCommandLine;
 import lv03.enums.OperatorType;
+import lv03.exceptions.NotValidInputException;
 import lv03.menus.CalculationMenu;
 import lv03.menus.MainMenu;
 import lv03.menus.MemoryMenu;
 
 public class Calculator {
-    private Input input = new CalculatorInput();
-    private Memory memory = new Memory();
-    private MainMenu mainMenu = new MainMenu();
-    private MemoryMenu memoryMenu = new MemoryMenu();
-    private CalculationMenu calculationMenu = new CalculationMenu();
-    private ArithmeticCalculator arithmeticCalculator = new ArithmeticCalculator();
+    private final Input input = new CalculatorInput();
+    private final Memory memory = new CalculatorMemory();
+    private final MainMenu mainMenu = new MainMenu();
+    private final MemoryMenu memoryMenu = new MemoryMenu();
+    private final CalculationMenu calculationMenu = new CalculationMenu();
+    private final ArithmeticCalculator arithmeticCalculator = new ArithmeticCalculator();
 
     public void run() {
         showMainMenu();
@@ -25,12 +28,14 @@ public class Calculator {
         while (mainMenu.getSatae()) {
             mainMenu.showMainMenuView();
             String command = input.input();
-            MainMenuCommandLine mainMenuCommandLine = MainMenuCommandLine.find(command);
 
             try {
+                if (!MainMenuCommandLine.isCommand(command)) throw new NotValidInputException();
+
+                MainMenuCommandLine mainMenuCommandLine = MainMenuCommandLine.find(command);
                 controlMainMenuByCommand(mainMenuCommandLine);
-            } catch (NullPointerException e) {
-                System.out.println("\n다시 입력하세요.");
+            } catch (NotValidInputException e) {
+                System.out.println(e.getMessage());
             }
         }
 
@@ -41,12 +46,14 @@ public class Calculator {
         while (memoryMenu.getSatae()) {
             memoryMenu.showMemoryMenuView();
             String command = input.input();
-            MemoryMenuCommandLine memoryMenuCommandLine = MemoryMenuCommandLine.find(command);
 
             try {
+                if (!MemoryMenuCommandLine.isCommand(command)) throw new NotValidInputException();
+
+                MemoryMenuCommandLine memoryMenuCommandLine = MemoryMenuCommandLine.find(command);
                 controlMemoryByCommand(memoryMenuCommandLine);
-            } catch (NullPointerException e) {
-                System.out.println("\n다시 입력하세요.");
+            } catch (NotValidInputException e) {
+                System.out.println(e.getMessage());
             }
         }
 
@@ -63,15 +70,26 @@ public class Calculator {
                 double inputSecondNum = Double.parseDouble(input.input());;
 
                 calculationMenu.showOperatorInputRequestView();
-                OperatorType inputOperatorType = OperatorType.find(input.input());
+                String operator = input.input();
 
+                // 연산자 enum 아닌 경우
+                if (!OperatorType.isOperator(operator)) {
+                    // 에러 msg
+                    continue;
+                }
+
+                OperatorType inputOperatorType = OperatorType.find(operator);
+
+                // 연산
                 Double result = arithmeticCalculator.calculate(inputFirstNum, inputSecondNum, inputOperatorType);
+
                 if (result != null) {
                     // 메모리에 저장
                     memory.save(result);
                 }
-                calculationMenu.setSatae(false);
-            } catch (NumberFormatException | NullPointerException e ) {
+
+                calculationMenu.setSatae(false); // 반복 해제
+            } catch (NotValidInputException e) {
                 System.out.println("\n다시 입력하세요.\n");
             }
         }

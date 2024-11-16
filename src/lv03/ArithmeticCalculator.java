@@ -5,7 +5,7 @@ import lv03.enums.OperatorType;
 
 public class ArithmeticCalculator{
     public <T extends Number> T calculate(double first, double second, OperatorType operatorType) {
-        double result = 0;
+        double result;
         switch (operatorType) {
             case PLUS -> {
                 result = new AdditionCalculation().calculate(first, second);

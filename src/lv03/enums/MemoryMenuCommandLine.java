@@ -9,10 +9,15 @@ public enum MemoryMenuCommandLine {
     CLEAR("clear"),
     BACK("back");
 
-    private String command;
+    private final String command;
 
     MemoryMenuCommandLine(String number) {
         this.command = number;
+    }
+
+    public static boolean isCommand(String input) {
+        return Arrays.stream(values())
+                .anyMatch(e -> e.command.equals(input));
     }
 
     public static MemoryMenuCommandLine find(String command) {
