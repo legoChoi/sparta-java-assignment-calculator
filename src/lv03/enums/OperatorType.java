@@ -10,7 +10,7 @@ public enum OperatorType {
     DIVIDE("/"),
     MOD("%");
 
-    private String operator;
+    private final String operator;
 
     OperatorType(String operator) {
         this.operator = operator;
@@ -18,6 +18,11 @@ public enum OperatorType {
 
     public String getOperator() {
         return operator;
+    }
+
+    public static boolean isOperator(String input) {
+        return Arrays.stream(values())
+                .anyMatch(op -> op.getOperator().equals(input));
     }
 
     public static OperatorType find(String operator) {

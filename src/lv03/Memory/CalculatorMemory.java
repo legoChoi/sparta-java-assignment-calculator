@@ -1,19 +1,23 @@
-package lv03;
+package lv03.Memory;
 
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
-public class Memory<T extends Number> {
-    private LinkedList<T> resultList = new LinkedList<>();
+public class CalculatorMemory implements Memory {
+    private final LinkedList<Number> resultList = new LinkedList<>();
 
+    @Override
     public void show() {
         System.out.println(">> " + resultList.toString());
+
     }
 
-    public void save(T result) {
+    @Override
+    public void save(Number result) {
         resultList.add(result);
     }
 
+    @Override
     public void deleteFirst() {
         if (resultList.isEmpty()) {
             System.out.println(">> 메모리가 비었습니다.");
@@ -23,15 +27,16 @@ public class Memory<T extends Number> {
         resultList.removeFirst();
     }
 
-    public void findBigger(T target) {
-        LinkedList<T> t = resultList.stream()
+    @Override
+    public void findBigger(Number target) {
+        LinkedList<Number> t = resultList.stream()
                 .filter(num -> num.doubleValue() > target.doubleValue())
                 .collect(Collectors.toCollection(LinkedList::new));
 
-        System.out.println(t.toString());
+        System.out.println(t);
     }
 
-
+    @Override
     public void clear() {
         resultList.clear();
     }
