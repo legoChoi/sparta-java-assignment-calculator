@@ -1,44 +1,30 @@
 package lv03;
 
 import lv03.calculations.*;
+import lv03.enums.ExceptionMessage;
 import lv03.enums.OperatorType;
 
 public class ArithmeticCalculator{
-    public <T extends Number> T calculate(double first, double second, OperatorType operatorType) {
+    public double calculate(double first, double second, OperatorType operatorType) {
         double result;
         switch (operatorType) {
-            case PLUS -> {
-                result = new AdditionCalculation().calculate(first, second);
-                System.out.println(result);
-            }
-            case MINUS -> {
-                result = new MinusCalculation().calculate(first, second);
-                System.out.println(result);
-            }
-            case MULTIPLY -> {
-                result = new MultiplyCalculation().calculate(first, second);
-                System.out.println(result);
-            }
-            case SQUARE -> {
-                result = new SquareCalculation().calculate(first, second);
-                System.out.println(result);
-            }
+            case PLUS -> result = new AdditionCalculation().calculate(first, second);
+            case MINUS -> result = new MinusCalculation().calculate(first, second);
+            case MULTIPLY -> result = new MultiplyCalculation().calculate(first, second);
+            case SQUARE -> result = new SquareCalculation().calculate(first, second);
+            case MOD -> result = new ModuloCalculation().calculate(first, second);
             case DIVIDE -> {
-                if (second == 0) throw new ArithmeticException("Divide by zero");
-
-                result = new DivideCalculation().calculate(first, second);
-                System.out.println(result);
+                try {
+                    if (second == 0) throw new ArithmeticException();
+                    result = new DivideCalculation().calculate(first, second);
+                    System.out.println(result);
+                } catch (ArithmeticException e) {
+                    System.out.println(ExceptionMessage.DIVIDE_BY_ZERO_EXCEPTION.getMessage());
+                    return Double.NaN;
+                }
             }
-            case MOD -> {
-                result = new ModuloCalculation().calculate(first, second);
-                System.out.println(result);
-            }
-            default -> {
-                System.out.println("잘못된 연산자 입력 됨");
-                return null;
-            }
+            default -> result = Double.NaN;
         }
-
-        return (T) Double.valueOf(result);
+        return result;
     }
 }

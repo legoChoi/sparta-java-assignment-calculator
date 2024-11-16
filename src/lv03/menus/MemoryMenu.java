@@ -1,19 +1,20 @@
 package lv03.menus;
 
-public class MemoryMenu extends Menu {
+public class MemoryMenu implements Menu {
     private boolean state = true;
 
     @Override
-    public boolean getSatae() {
+    public boolean getState() {
         return state;
     }
 
     @Override
-    public void setSatae(boolean state) {
+    public void setState(boolean state) {
         this.state = state;
     }
 
-    public void showMemoryMenuView() {
+    @Override
+    public void showMenu() {
         System.out.println("\n---------------------");
         System.out.println("1. 조회 >> show");
         System.out.println("2. 오래된 기록 삭제 >> delete first");

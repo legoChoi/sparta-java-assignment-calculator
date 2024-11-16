@@ -1,10 +1,7 @@
 package lv03.menus;
 
-public abstract class Menu {
-    boolean state = false;
-
-    public abstract boolean getSatae();
-
-    public abstract void setSatae(boolean state);
-
+public interface Menu {
+    boolean getState();
+    void setState(boolean state);
+    void showMenu();
 }
