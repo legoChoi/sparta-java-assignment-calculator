@@ -4,134 +4,138 @@ import lv03.Input.CalculatorInput;
 import lv03.Input.Input;
 import lv03.Memory.CalculatorMemory;
 import lv03.Memory.Memory;
+import lv03.enums.ExceptionMessage;
 import lv03.enums.MainMenuCommandLine;
 import lv03.enums.MemoryMenuCommandLine;
 import lv03.enums.OperatorType;
-import lv03.exceptions.NotValidInputException;
+import lv03.exceptions.NotValidCommandInputException;
+import lv03.exceptions.NotValidOperatorInputException;
 import lv03.menus.CalculationMenu;
 import lv03.menus.MainMenu;
 import lv03.menus.MemoryMenu;
+import lv03.menus.Menu;
+import lv03.validator.*;
 
 public class Calculator {
-    private final Input input = new CalculatorInput();
-    private final Memory memory = new CalculatorMemory();
-    private final MainMenu mainMenu = new MainMenu();
-    private final MemoryMenu memoryMenu = new MemoryMenu();
+    private final Menu mainMenu = new MainMenu();
+    private final Menu memoryMenu = new MemoryMenu();
     private final CalculationMenu calculationMenu = new CalculationMenu();
+    private final Input calculatorInput = new CalculatorInput();
+    private final Memory memory = new CalculatorMemory();
+    private final Validator operatorValidator = new OperatorValidator();
+    private final Validator mainMenuCommandValidator = new MainMenuCommandValidator();
+    private final Validator memoryMenuCommandValidator = new MemoryMenuCommandValidator();
     private final ArithmeticCalculator arithmeticCalculator = new ArithmeticCalculator();
 
-    public void run() {
+    public Calculator() {
         showMainMenu();
     }
 
     public void showMainMenu() {
-        while (mainMenu.getSatae()) {
-            mainMenu.showMainMenuView();
-            String command = input.input();
+        while (mainMenu.getState()) {
+            mainMenu.showMenu();
+            String command = calculatorInput.input();
 
             try {
-                if (!MainMenuCommandLine.isCommand(command)) throw new NotValidInputException();
+                if (!mainMenuCommandValidator.isValid(command)) throw new NotValidCommandInputException();
 
                 MainMenuCommandLine mainMenuCommandLine = MainMenuCommandLine.find(command);
                 controlMainMenuByCommand(mainMenuCommandLine);
-            } catch (NotValidInputException e) {
+            } catch (NotValidCommandInputException e) {
                 System.out.println(e.getMessage());
             }
         }
 
-        input.end(); // Scanner 종료
+        calculatorInput.end(); // Scanner 종료
     }
 
     public void showMemoryMenu() {
-        while (memoryMenu.getSatae()) {
-            memoryMenu.showMemoryMenuView();
-            String command = input.input();
+        while (memoryMenu.getState()) {
+            memoryMenu.showMenu();
+            String command = calculatorInput.input();
 
             try {
-                if (!MemoryMenuCommandLine.isCommand(command)) throw new NotValidInputException();
+                if (!memoryMenuCommandValidator.isValid(command)) throw new NotValidCommandInputException();
 
                 MemoryMenuCommandLine memoryMenuCommandLine = MemoryMenuCommandLine.find(command);
                 controlMemoryByCommand(memoryMenuCommandLine);
-            } catch (NotValidInputException e) {
+            } catch (NotValidCommandInputException e) {
                 System.out.println(e.getMessage());
             }
         }
 
-        memoryMenu.setSatae(true);
+        memoryMenu.setState(true);
     }
 
     public void calculationMenu() {
-        while(calculationMenu.getSatae()) {
+        while(calculationMenu.getState()) {
             try {
-                calculationMenu.showFirstNumberInputRequestView();
-                double inputFirstNum = Double.parseDouble(input.input());
+                calculationMenu.showMenu();
+                double inputFirstNum = Double.parseDouble(calculatorInput.input());
 
                 calculationMenu.showSecondNumberInputRequestView();
-                double inputSecondNum = Double.parseDouble(input.input());;
+                double inputSecondNum = Double.parseDouble(calculatorInput.input());;
 
                 calculationMenu.showOperatorInputRequestView();
-                String operator = input.input();
+                String operator = calculatorInput.input();
 
                 // 연산자 enum 아닌 경우
-                if (!OperatorType.isOperator(operator)) {
-                    // 에러 msg
-                    continue;
-                }
+                if (!operatorValidator.isValid(operator)) throw new NotValidOperatorInputException();
 
                 OperatorType inputOperatorType = OperatorType.find(operator);
 
                 // 연산
-                Double result = arithmeticCalculator.calculate(inputFirstNum, inputSecondNum, inputOperatorType);
+                double result = arithmeticCalculator.calculate(inputFirstNum, inputSecondNum, inputOperatorType);
 
-                if (result != null) {
-                    // 메모리에 저장
+                // 메모리에 저장
+                if (!Double.isNaN(result)) {
                     memory.save(result);
+                    System.out.println(">> " + result);
                 }
 
-                calculationMenu.setSatae(false); // 반복 해제
-            } catch (NotValidInputException e) {
-                System.out.println("\n다시 입력하세요.\n");
+                calculationMenu.setState(false); // 반복 해제
+            } catch (NotValidOperatorInputException e) {
+                System.out.println(e.getMessage());
+            } catch (NumberFormatException e) {
+                System.out.println(ExceptionMessage.NOT_VALID_OPERAND_INPUT_EXCEPTION.getMessage());
             }
         }
 
-        calculationMenu.setSatae(true);
+        calculationMenu.setState(true);
     }
 
+    // 메인 메뉴
     public void controlMainMenuByCommand(MainMenuCommandLine command) {
         switch (command) {
-            case CALCULATE -> // Arithmetic Calculator 계산 진행
-                calculationMenu();
-
-            case MEMORY -> // 메모리 메뉴로 이동
-                showMemoryMenu();
-
-            case EXIT -> // 시스템 종료
-                mainMenu.setSatae(false);
+            // Arithmetic Calculator 계산 진행
+            case CALCULATE -> calculationMenu();
+            // 메모리 메뉴로 이동
+            case MEMORY -> showMemoryMenu();
+            // 시스템 종료
+            case EXIT -> mainMenu.setState(false);
         }
     }
 
+    // 메모리 메뉴
     public void controlMemoryByCommand(MemoryMenuCommandLine command) {
         switch (command) {
-            case SHOW -> // 컬렉션 보여주기
-                memory.show();
-
-            case DELETE_FIRST -> // 첫번째 삭제 후 컬렉션 보여주기
-                memory.deleteFirst();
-
-            case FIND_BIGGER -> { // 입력한 숫자보다 높은 값 컬렉션 보여주기
+            // 컬렉션 보여주기
+            case SHOW -> memory.show();
+            // 첫번째 삭제 후 컬렉션 보여주기
+            case DELETE_FIRST -> memory.deleteFirst();
+            // 입력한 숫자보다 높은 값 컬렉션 보여주기
+            case FIND_BIGGER -> {
                 try {
-                    double target = Double.parseDouble(input.input());
+                    double target = Double.parseDouble(calculatorInput.input());
                     memory.findBigger(target);
                 } catch (NumberFormatException e) {
                     e.getMessage();
                 }
             }
-
-            case CLEAR -> // 컬렉션 비우기
-                memory.clear();
-
-            case BACK -> // 메인 메뉴로 돌아가기
-                memoryMenu.setSatae(false);
+            // 컬렉션 비우기
+            case CLEAR -> memory.clear();
+            // 메인 메뉴로 돌아가기
+            case BACK -> memoryMenu.setState(false);
         }
     }
 }

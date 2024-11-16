@@ -1,19 +1,20 @@
 package lv03.menus;
 
-public class MainMenu extends Menu {
+public class MainMenu implements Menu {
     private boolean state = true;
 
     @Override
-    public boolean getSatae() {
+    public boolean getState() {
         return state;
     }
 
     @Override
-    public void setSatae(boolean state) {
+    public void setState(boolean state) {
         this.state = state;
     }
 
-    public void showMainMenuView() {
+    @Override
+    public void showMenu() {
         System.out.println("\n---------------------");
         System.out.println("1. 계산 >> calculate");
         System.out.println("2. 메모리 >> memory");
