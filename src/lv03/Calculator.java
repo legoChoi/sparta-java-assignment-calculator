@@ -4,6 +4,7 @@ import lv03.Input.CalculatorInput;
 import lv03.Input.Input;
 import lv03.Memory.CalculatorMemory;
 import lv03.Memory.Memory;
+import lv03.dto.CalculatorInputDto;
 import lv03.enums.ExceptionMessage;
 import lv03.enums.MainMenuCommandLine;
 import lv03.enums.MemoryMenuCommandLine;
@@ -71,21 +72,21 @@ public class Calculator {
         while(calculationMenu.getState()) {
             try {
                 calculationMenu.showMenu();
-                double inputFirstNum = Double.parseDouble(calculatorInput.input());
+                double inputFirstOperand = Double.parseDouble(calculatorInput.input());
 
                 calculationMenu.showSecondNumberInputRequestView();
-                double inputSecondNum = Double.parseDouble(calculatorInput.input());;
+                double inputSecondOperand = Double.parseDouble(calculatorInput.input());;
 
                 calculationMenu.showOperatorInputRequestView();
-                String operator = calculatorInput.input();
+                String inputOperator = calculatorInput.input();
 
                 // 연산자 enum 아닌 경우
-                if (!operatorValidator.isValid(operator)) throw new NotValidOperatorInputException();
+                if (!operatorValidator.isValid(inputOperator)) throw new NotValidOperatorInputException();
 
-                OperatorType inputOperatorType = OperatorType.find(operator);
+                OperatorType inputOperatorType = OperatorType.find(inputOperator);
 
                 // 연산
-                double result = arithmeticCalculator.calculate(inputFirstNum, inputSecondNum, inputOperatorType);
+                double result = arithmeticCalculator.calculate(new CalculatorInputDto(inputFirstOperand, inputSecondOperand, inputOperatorType));
 
                 // 메모리에 저장
                 if (!Double.isNaN(result)) {
