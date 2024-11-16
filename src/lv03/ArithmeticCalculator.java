@@ -3,7 +3,6 @@ package lv03;
 import lv03.calculations.*;
 import lv03.dto.CalculatorInputDto;
 import lv03.enums.ExceptionMessage;
-import lv03.enums.OperatorType;
 
 public class ArithmeticCalculator{
     public double calculate(CalculatorInputDto calculatorInputDto) {
@@ -18,7 +17,6 @@ public class ArithmeticCalculator{
                 try {
                     if (calculatorInputDto.secondOperand() == 0) throw new ArithmeticException();
                     result = new DivideCalculation().calculate(calculatorInputDto.firstOperand(), calculatorInputDto.secondOperand());
-                    System.out.println(result);
                 } catch (ArithmeticException e) {
                     System.out.println(ExceptionMessage.DIVIDE_BY_ZERO_EXCEPTION.getMessage());
                     return Double.NaN;

@@ -1,5 +1,7 @@
 package lv03.enums;
 
+import lv03.exceptions.NotValidCommandInputException;
+
 import java.util.Arrays;
 
 public enum MainMenuCommandLine {
@@ -22,7 +24,7 @@ public enum MainMenuCommandLine {
         return Arrays.stream(values())
                 .filter(v -> v.command.equals(command.toLowerCase()))
                 .findAny()
-                .orElse(null);
+                .orElseThrow(NotValidCommandInputException::new);
     }
 }
 

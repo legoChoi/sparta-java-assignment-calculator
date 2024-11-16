@@ -1,5 +1,8 @@
 package lv03.enums;
 
+import lv03.exceptions.NotValidCommandInputException;
+import lv03.exceptions.NotValidOperatorInputException;
+
 import java.util.Arrays;
 
 public enum OperatorType {
@@ -29,6 +32,6 @@ public enum OperatorType {
         return Arrays.stream(values())
                 .filter(v -> v.operator.equals(operator))
                 .findAny()
-                .orElse(null);
+                .orElseThrow(NotValidOperatorInputException::new);
     }
 }
