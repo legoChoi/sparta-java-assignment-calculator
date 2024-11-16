@@ -1,3 +1,5 @@
+package lv01;
+
 import java.util.Scanner;
 
 // LV 1 계산기
