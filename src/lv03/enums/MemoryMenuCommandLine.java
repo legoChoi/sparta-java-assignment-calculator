@@ -39,7 +39,7 @@ public enum MemoryMenuCommandLine {
                 .anyMatch(e -> e.command.equals(input));
     }
 
-    public static MemoryMenuCommandLine find(String command) {
+    public static MemoryMenuCommandLine findByIndexOrCommand(String command) {
         return Arrays.stream(values())
                 .filter(v -> v.command.equals(command.toLowerCase()))
                 .findAny()

@@ -8,7 +8,7 @@ public class CalculatorOutput implements Output {
     }
 
     @Override
-    public void errMessage(String msg) {
+    public void printErrMessage(String msg) {
         System.out.println(msg);
     }
 }

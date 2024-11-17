@@ -2,6 +2,7 @@ package lv03;
 
 import lv03.input.CalculatorInput;
 import lv03.menus.MainMenu;
+import lv03.menus.MemoryMenu;
 import lv03.output.CalculatorOutput;
 
 public class App {
@@ -9,7 +10,11 @@ public class App {
         new Calculator(
                 new MainMenu(
                         new CalculatorInput(),
-                        new CalculatorOutput()
+                        new CalculatorOutput(),
+                        new MemoryMenu(
+                                new CalculatorInput(),
+                                new CalculatorOutput()
+                        )
                 )
         );
     }
