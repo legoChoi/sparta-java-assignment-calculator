@@ -5,7 +5,7 @@ import lv03.commons.exceptions.NotValidCommandInputException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public enum MemoryMenuCommandLine {
+public enum MemoryMenuCommand {
     SHOW("show", "1"),
     DELETE_FIRST("delete first", "2"),
     FIND_BIGGER("find bigger", "3"),
@@ -15,7 +15,7 @@ public enum MemoryMenuCommandLine {
     private final String command;
     private final String index;
 
-    MemoryMenuCommandLine(String command, String index) {
+    MemoryMenuCommand(String command, String index) {
         this.command = command;
         this.index = index;
     }
@@ -39,7 +39,7 @@ public enum MemoryMenuCommandLine {
                 .anyMatch(e -> e.command.equals(input));
     }
 
-    public static MemoryMenuCommandLine findByIndexOrCommand(String command) {
+    public static MemoryMenuCommand findByIndexOrCommand(String command) {
         return Arrays.stream(values())
                 .filter(v -> v.getCommand().equals(command) || v.getIndex().equals(command))
                 .findAny()

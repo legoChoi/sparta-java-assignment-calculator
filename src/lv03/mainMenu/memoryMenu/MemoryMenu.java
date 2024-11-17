@@ -2,7 +2,7 @@ package lv03.mainMenu.memoryMenu;
 
 import lv03.interfaces.Menu;
 import lv03.memory.Memory;
-import lv03.mainMenu.memoryMenu.models.enums.MemoryMenuCommandLine;
+import lv03.mainMenu.memoryMenu.models.enums.MemoryMenuCommand;
 import lv03.commons.exceptions.MemoryEmptyException;
 import lv03.commons.exceptions.NotValidCommandInputException;
 import lv03.input.Input;
@@ -34,16 +34,16 @@ public class MemoryMenu implements Menu {
 
     @Override
     public void execute() {
-        String memoryMenuList = MemoryMenuCommandLine.getMemoryMenuList();
-        String commandInput;
+        String memoryMenuList = MemoryMenuCommand.getMemoryMenuList();
+        String memoryMenuCommandInput;
 
         while (getState()) {
             showMenu(memoryMenuList);
-            commandInput = calculatorInput.input();
+            memoryMenuCommandInput = calculatorInput.input();
 
             try {
-                MemoryMenuCommandLine mainMenuCommandLine = MemoryMenuCommandLine.findByIndexOrCommand(commandInput);
-                controller(mainMenuCommandLine);
+                MemoryMenuCommand mainMenuCommand = MemoryMenuCommand.findByIndexOrCommand(memoryMenuCommandInput);
+                controller(mainMenuCommand);
             } catch (NotValidCommandInputException | MemoryEmptyException e) {
                 calculatorOutput.printErrMessage(e.getMessage());
             }
@@ -52,8 +52,8 @@ public class MemoryMenu implements Menu {
         switchState(); // memory 메뉴에 재진입 할 수 있도록 상태 복구
     }
 
-    private void controller(MemoryMenuCommandLine commandLine) {
-        switch (commandLine) {
+    private void controller(MemoryMenuCommand memoryMenuCommandInput) {
+        switch (memoryMenuCommandInput) {
             case SHOW -> calculatorOutput.printMemory(calculatorMemory.getMemory());
             case DELETE_FIRST -> calculatorOutput.printMemory(calculatorMemory.deleteFirst());
             case FIND_BIGGER -> calculatorOutput.printMemory(calculatorMemory.findBigger(calculatorInput.input()));

@@ -1,12 +1,18 @@
 package lv03.mainMenu.io.input;
 
 import lv03.input.Input;
-
 import java.util.Scanner;
 
 public class mainMenuInput implements Input {
+    private final Scanner scanner;
+
+    public mainMenuInput(Scanner scanner) {
+        this.scanner = scanner;
+    }
+
     @Override
-    public String input(Scanner scanner) {
-        return ">> ";
+    public String input() {
+        System.out.print(">> ");
+        return scanner.nextLine();
     }
 }

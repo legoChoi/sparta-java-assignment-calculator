@@ -5,7 +5,7 @@ import lv03.commons.exceptions.NotValidCommandInputException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public enum MainMenuCommandLine {
+public enum MainMenuCommand {
     CALCULATE("calculate", "1"),
     MEMORY("memory", "2"),
     EXIT("exit", "3");
@@ -13,7 +13,7 @@ public enum MainMenuCommandLine {
     private final String command;
     private final String index;
 
-    MainMenuCommandLine(String command, String index) {
+    MainMenuCommand(String command, String index) {
         this.command = command;
         this.index = index;
     }
@@ -37,7 +37,7 @@ public enum MainMenuCommandLine {
                 .anyMatch(e -> e.command.equals(input));
     }
 
-    public static MainMenuCommandLine findByIndexOrCommand(String command) {
+    public static MainMenuCommand findByIndexOrCommand(String command) {
         return Arrays.stream(values())
                 .filter(v -> v.getCommand().equals(command) || v.getIndex().equals(command))
                 .findAny()
