@@ -41,7 +41,7 @@ public enum MemoryMenuCommandLine {
 
     public static MemoryMenuCommandLine findByIndexOrCommand(String command) {
         return Arrays.stream(values())
-                .filter(v -> v.command.equals(command.toLowerCase()))
+                .filter(v -> v.getCommand().equals(command) || v.getIndex().equals(command))
                 .findAny()
                 .orElseThrow(NotValidCommandInputException::new);
     }

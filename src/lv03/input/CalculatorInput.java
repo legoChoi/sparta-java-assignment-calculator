@@ -9,8 +9,4 @@ public class CalculatorInput implements Input {
         System.out.print(">> ");
         return scanner.nextLine();
     }
-
-    public void end() {
-        scanner.close();
-    }
 }
