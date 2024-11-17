@@ -6,12 +6,23 @@ import lv03.input.Input;
 import lv03.output.Output;
 
 public class MainMenu implements Menu {
+    private boolean state = true;
     private final Input calculatorInput;
     private final Output calculatorOutput;
+    private final Menu memoryMenu;
 
-    public MainMenu(Input input, Output output) {
+    public MainMenu(Input input, Output output, Menu memoryMenu) {
         this.calculatorInput = input;
         this.calculatorOutput = output;
+        this.memoryMenu = memoryMenu;
+    }
+
+    private boolean getState() {
+        return state;
+    }
+
+    private void setState(boolean state) {
+        this.state = state;
     }
 
     @Override
@@ -26,13 +37,13 @@ public class MainMenu implements Menu {
 
         showMenu(mainMenuList);
 
-        while (!commandInput.equals(MainMenuCommandLine.EXIT.getCommand())) {
+        while (getState()) {
             commandInput = calculatorInput.input();
             try {
                 MainMenuCommandLine mainMenuCommandLine = MainMenuCommandLine.findByIndexOrCommand(commandInput);
                 controller(mainMenuCommandLine);
             } catch (NotValidCommandInputException e) {
-                calculatorOutput.errMessage(e.getMessage());
+                calculatorOutput.printErrMessage(e.getMessage());
                 showMenu(mainMenuList);
             }
         }
@@ -45,8 +56,10 @@ public class MainMenu implements Menu {
                 break;
             case MEMORY:
                 // 메모리 메뉴
+                memoryMenu.execute();
                 break;
             case EXIT:
+                setState(false);
                 break;
         }
     }
