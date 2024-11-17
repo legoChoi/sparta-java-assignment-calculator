@@ -1,42 +1,41 @@
 package lv03.Memory;
 
 import java.util.LinkedList;
-import java.util.stream.Collectors;
+import java.util.List;
 
-public class CalculatorMemory<T extends Number> implements Memory {
-    private final LinkedList<T> resultList = new LinkedList<>();
+public class CalculatorMemory implements Memory<Double> {
+    private final LinkedList<Double> resultList = new LinkedList<>();
 
     @Override
-    public void show() {
-        System.out.println(">> " + resultList);
+    public List<Double> getMemory() {
+        return resultList;
     }
 
     @Override
-    public void save(Number result) {
-        resultList.add((T) result);
+    public List<Double> save(Double result) {
+        resultList.add(result);
+
+        return getMemory();
     }
 
     @Override
-    public void deleteFirst() {
-        if (resultList.isEmpty()) {
-            System.out.println(">> 메모리가 비었습니다.");
-            return;
-        }
+    public List<Double> deleteFirst() {
+//        if (resultList.isEmpty()) return false; // exception
 
         resultList.removeFirst();
+        return getMemory();
     }
 
     @Override
-    public void findBigger(Number target) {
-        LinkedList<Number> t = resultList.stream()
-                .filter(num -> num.doubleValue() > target.doubleValue())
-                .collect(Collectors.toCollection(LinkedList::new));
-
-        System.out.println(t);
+    public List<Double> findBigger(String target) {
+        return resultList.stream()
+                .filter(num -> num > Double.parseDouble(target))  // target 보다 큰 경우
+                .toList();
     }
 
     @Override
-    public void clear() {
+    public List<Double> clear() {
         resultList.clear();
+        return getMemory();
     }
 }

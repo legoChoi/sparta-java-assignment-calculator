@@ -10,19 +10,23 @@ public class MainMenu implements Menu {
     private final Input calculatorInput;
     private final Output calculatorOutput;
     private final Menu memoryMenu;
+    private final Menu calculationMenu;
 
-    public MainMenu(Input input, Output output, Menu memoryMenu) {
+    public MainMenu(Input input, Output output, Menu memoryMenu, Menu calculationMenu) {
         this.calculatorInput = input;
         this.calculatorOutput = output;
         this.memoryMenu = memoryMenu;
+        this.calculationMenu = calculationMenu;
     }
 
-    private boolean getState() {
+    @Override
+    public boolean getState() {
         return state;
     }
 
-    private void setState(boolean state) {
-        this.state = state;
+    @Override
+    public void switchState() {
+        state = !state;
     }
 
     @Override
@@ -33,18 +37,17 @@ public class MainMenu implements Menu {
     @Override
     public void execute() {
         String mainMenuList = MainMenuCommandLine.getMainMenuList();
-        String commandInput = "";
-
-        showMenu(mainMenuList);
+        String commandInput;
 
         while (getState()) {
+            showMenu(mainMenuList);
             commandInput = calculatorInput.input();
+
             try {
                 MainMenuCommandLine mainMenuCommandLine = MainMenuCommandLine.findByIndexOrCommand(commandInput);
                 controller(mainMenuCommandLine);
             } catch (NotValidCommandInputException e) {
                 calculatorOutput.printErrMessage(e.getMessage());
-                showMenu(mainMenuList);
             }
         }
     }
@@ -53,13 +56,14 @@ public class MainMenu implements Menu {
         switch (mainMenuCommandLine) {
             case CALCULATE:
                 // 계산 메뉴
+                calculationMenu.execute();
                 break;
             case MEMORY:
                 // 메모리 메뉴
                 memoryMenu.execute();
                 break;
             case EXIT:
-                setState(false);
+                switchState();
                 break;
         }
     }

@@ -1,26 +1,31 @@
 package lv03.menus;
 
+import lv03.Memory.Memory;
 import lv03.enums.MemoryMenuCommandLine;
 import lv03.exceptions.NotValidCommandInputException;
 import lv03.input.Input;
 import lv03.output.Output;
 
 public class MemoryMenu implements Menu {
+    private boolean state = true;
     private final Input calculatorInput;
     private final Output calculatorOutput;
-    private boolean state = true;
+    private final Memory<Double> calculatorMemory;
 
-    public MemoryMenu(Input calculatorInput, Output calculatorOutput) {
+    public MemoryMenu(Input calculatorInput, Output calculatorOutput, Memory<Double> calculatorMemory) {
         this.calculatorInput = calculatorInput;
         this.calculatorOutput = calculatorOutput;
+        this.calculatorMemory = calculatorMemory;
     }
 
-    private boolean getState() {
+    @Override
+    public boolean getState() {
         return state;
     }
 
-    private void setState(boolean state) {
-        this.state = state;
+    @Override
+    public void switchState() {
+        state = !state;
     }
 
     @Override
@@ -31,37 +36,30 @@ public class MemoryMenu implements Menu {
     @Override
     public void execute() {
         String memoryMenuList = MemoryMenuCommandLine.getMemoryMenuList();
-        String commandInput = "";
-
-        showMenu(memoryMenuList);
+        String commandInput;
 
         while (getState()) {
+            showMenu(memoryMenuList);
             commandInput = calculatorInput.input();
+
             try {
                 MemoryMenuCommandLine mainMenuCommandLine = MemoryMenuCommandLine.findByIndexOrCommand(commandInput);
                 controller(mainMenuCommandLine);
             } catch (NotValidCommandInputException e) {
                 calculatorOutput.printErrMessage(e.getMessage());
-                showMenu(memoryMenuList);
             }
         }
 
-        setState(true);
+        switchState(); // memory 메뉴에 재진입 할 수 있도록 상태 복구
     }
 
     private void controller(MemoryMenuCommandLine commandLine) {
         switch (commandLine) {
-            case SHOW:
-                break;
-            case DELETE_FIRST:
-                break;
-            case FIND_BIGGER:
-                break;
-            case CLEAR:
-                break;
-            case BACK:
-                setState(false);
-                break;
+            case SHOW -> calculatorOutput.printMemory(calculatorMemory.getMemory());
+            case DELETE_FIRST -> calculatorOutput.printMemory(calculatorMemory.deleteFirst());
+            case FIND_BIGGER -> calculatorOutput.printMemory(calculatorMemory.findBigger(calculatorInput.input()));
+            case CLEAR -> calculatorOutput.printMemory(calculatorMemory.clear());
+            case BACK -> switchState(); // BACK 명령어로 돌아가기 : 반복문 종료를 위한 상태 변경
         }
     }
 }

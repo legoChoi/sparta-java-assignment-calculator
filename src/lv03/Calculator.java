@@ -8,11 +8,10 @@ public class Calculator {
 
     public Calculator(MainMenu mainMenu) {
         this.mainMenu = mainMenu;
-
         run();
     }
 
-    public void run() {
+    private void run() {
         mainMenu.execute();
     }
 

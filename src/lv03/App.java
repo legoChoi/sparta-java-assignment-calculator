@@ -1,6 +1,8 @@
 package lv03;
 
+import lv03.Memory.CalculatorMemory;
 import lv03.input.CalculatorInput;
+import lv03.menus.CalculationMenu;
 import lv03.menus.MainMenu;
 import lv03.menus.MemoryMenu;
 import lv03.output.CalculatorOutput;
@@ -13,8 +15,10 @@ public class App {
                         new CalculatorOutput(),
                         new MemoryMenu(
                                 new CalculatorInput(),
-                                new CalculatorOutput()
-                        )
+                                new CalculatorOutput(),
+                                new CalculatorMemory()
+                        ),
+                        new CalculationMenu()
                 )
         );
     }
