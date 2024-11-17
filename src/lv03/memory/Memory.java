@@ -1,4 +1,4 @@
-package lv03.Memory;
+package lv03.memory;
 
 import java.util.List;
 

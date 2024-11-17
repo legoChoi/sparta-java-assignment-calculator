@@ -1,6 +1,6 @@
-package lv03.exceptions;
+package lv03.commons.exceptions;
 
-import lv03.enums.ExceptionMessage;
+import lv03.commons.exceptions.errorMessages.ExceptionMessage;
 
 public class NotValidCommandInputException extends RuntimeException {
     public NotValidCommandInputException() {

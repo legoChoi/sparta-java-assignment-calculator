@@ -1,13 +1,12 @@
-package lv03.enums;
+package lv03.mainMenu.calculationMenu.models.enums;
 
-import lv03.dto.CalculatorInputDto;
-import lv03.exceptions.NotValidOperandInputException;
-import lv03.exceptions.NotValidOperatorInputException;
+import lv03.commons.exceptions.errorMessages.ExceptionMessage;
+import lv03.commons.exceptions.NotValidOperatorInputException;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;
 
-public enum OperatorType {
+public enum OperatorCommand {
     PLUS("+", (n1, n2) -> n1 + n2),
     MINUS("-", (n1, n2) -> n1 - n2),
     MULTIPLY("*", (n1, n2) -> n1 * n2),
@@ -22,7 +21,7 @@ public enum OperatorType {
     private final String operator;
     private final BiFunction<Double, Double, Double> calculation;
 
-    OperatorType(String operator, BiFunction<Double, Double, Double> calculation) {
+    OperatorCommand(String operator, BiFunction<Double, Double, Double> calculation) {
         this.operator = operator;
         this.calculation = calculation;
     }
@@ -40,7 +39,7 @@ public enum OperatorType {
             return calculation.apply(firstOperand, secondOperand);
     }
 
-    public static OperatorType find(String operator) {
+    public static OperatorCommand find(String operator) {
         return Arrays.stream(values())
                 .filter(v -> v.operator.equals(operator))
                 .findAny()

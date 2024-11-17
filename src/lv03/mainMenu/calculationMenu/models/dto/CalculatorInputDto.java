@@ -1,6 +1,4 @@
-package lv03.dto;
-
-import lv03.enums.OperatorType;
+package lv03.mainMenu.calculationMenu.models.dto;
 
 public record CalculatorInputDto(
         double firstOperand,

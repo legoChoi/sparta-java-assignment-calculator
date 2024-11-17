@@ -1,8 +1,9 @@
-package lv03.menus;
+package lv03.mainMenu;
 
-import lv03.enums.MainMenuCommandLine;
-import lv03.exceptions.NotValidCommandInputException;
+import lv03.mainMenu.models.enums.MainMenuCommand;
+import lv03.commons.exceptions.NotValidCommandInputException;
 import lv03.input.Input;
+import lv03.interfaces.Menu;
 import lv03.output.Output;
 
 public class MainMenu implements Menu {
@@ -32,27 +33,28 @@ public class MainMenu implements Menu {
     }
 
     @Override
-    public void execute() {
-        String mainMenuList = MainMenuCommandLine.getMainMenuList();
-        String commandInput;
+    public void executeMenu() {
+        String mainMenuList = MainMenuCommand.getMainMenuList();
+        String mainMenuCommandInput;
+
 
         while (getState()) {
             showMenu(mainMenuList);
-            commandInput = calculatorInput.input();
+            mainMenuCommandInput = calculatorInput.input();
 
             try {
-                MainMenuCommandLine mainMenuCommandLine = MainMenuCommandLine.findByIndexOrCommand(commandInput);
-                controller(mainMenuCommandLine);
+                MainMenuCommand mainMenuCommand = MainMenuCommand.findByIndexOrCommand(mainMenuCommandInput);
+                controller(mainMenuCommand);
             } catch (NotValidCommandInputException e) {
                 calculatorOutput.printErrMessage(e.getMessage());
             }
         }
     }
 
-    private void controller(MainMenuCommandLine mainMenuCommandLine) {
-        switch (mainMenuCommandLine) {
-            case CALCULATE -> calculationMenu.execute();
-            case MEMORY -> memoryMenu.execute();
+    private void controller(MainMenuCommand mainMenuCommandInput) {
+        switch (mainMenuCommandInput) {
+            case CALCULATE -> calculationMenu.executeMenu();
+            case MEMORY -> memoryMenu.executeMenu();
             case EXIT -> switchState();
         }
     }
