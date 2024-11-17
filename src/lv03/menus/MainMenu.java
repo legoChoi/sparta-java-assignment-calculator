@@ -19,18 +19,15 @@ public class MainMenu implements Menu {
         this.calculationMenu = calculationMenu;
     }
 
-    @Override
-    public boolean getState() {
+    private boolean getState() {
         return state;
     }
 
-    @Override
-    public void switchState() {
+    private void switchState() {
         state = !state;
     }
 
-    @Override
-    public void showMenu(String menu) {
+    private void showMenu(String menu) {
         calculatorOutput.printMenu(menu);
     }
 
@@ -54,17 +51,9 @@ public class MainMenu implements Menu {
 
     private void controller(MainMenuCommandLine mainMenuCommandLine) {
         switch (mainMenuCommandLine) {
-            case CALCULATE:
-                // 계산 메뉴
-                calculationMenu.execute();
-                break;
-            case MEMORY:
-                // 메모리 메뉴
-                memoryMenu.execute();
-                break;
-            case EXIT:
-                switchState();
-                break;
+            case CALCULATE -> calculationMenu.execute();
+            case MEMORY -> memoryMenu.execute();
+            case EXIT -> switchState();
         }
     }
 }
