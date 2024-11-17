@@ -11,16 +11,19 @@ public class CalculatorOutput implements Output {
 
     @Override
     public void printErrMessage(String msg) {
+        System.out.println();
         System.out.println(msg);
     }
 
     @Override
     public void printMemory(List<Double> memory) {
-        System.out.println(memory);
+        System.out.println();
+        System.out.println(">> " + memory);
     }
 
     @Override
     public void printSysMessage(String msg) {
+        System.out.println();
         System.out.println(msg);
     }
 }

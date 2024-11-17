@@ -1,5 +1,6 @@
 package lv03.mainMenu.memoryMenu;
 
+import lv03.commons.exceptions.errorMessages.ExceptionMessage;
 import lv03.interfaces.Menu;
 import lv03.memory.Memory;
 import lv03.mainMenu.memoryMenu.models.enums.MemoryMenuCommand;
@@ -33,7 +34,7 @@ public class MemoryMenu implements Menu {
     }
 
     @Override
-    public void execute() {
+    public void executeMenu() {
         String memoryMenuList = MemoryMenuCommand.getMemoryMenuList();
         String memoryMenuCommandInput;
 
@@ -44,7 +45,7 @@ public class MemoryMenu implements Menu {
             try {
                 MemoryMenuCommand mainMenuCommand = MemoryMenuCommand.findByIndexOrCommand(memoryMenuCommandInput);
                 controller(mainMenuCommand);
-            } catch (NotValidCommandInputException | MemoryEmptyException e) {
+            } catch (NotValidCommandInputException | MemoryEmptyException | NumberFormatException e) {
                 calculatorOutput.printErrMessage(e.getMessage());
             }
         }
@@ -56,7 +57,10 @@ public class MemoryMenu implements Menu {
         switch (memoryMenuCommandInput) {
             case SHOW -> calculatorOutput.printMemory(calculatorMemory.getMemory());
             case DELETE_FIRST -> calculatorOutput.printMemory(calculatorMemory.deleteFirst());
-            case FIND_BIGGER -> calculatorOutput.printMemory(calculatorMemory.findBigger(calculatorInput.input()));
+            case FIND_BIGGER -> {
+                calculatorOutput.printSysMessage("대상(혁) 입력");
+                calculatorOutput.printMemory(calculatorMemory.findBigger(calculatorInput.input()));
+            }
             case CLEAR -> calculatorOutput.printMemory(calculatorMemory.clear());
             case BACK -> switchState(); // BACK 명령어로 돌아가기 : 반복문 종료를 위한 상태 변경
         }

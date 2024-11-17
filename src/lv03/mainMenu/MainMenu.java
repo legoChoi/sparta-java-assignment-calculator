@@ -33,9 +33,10 @@ public class MainMenu implements Menu {
     }
 
     @Override
-    public void execute() {
+    public void executeMenu() {
         String mainMenuList = MainMenuCommand.getMainMenuList();
         String mainMenuCommandInput;
+
 
         while (getState()) {
             showMenu(mainMenuList);
@@ -52,8 +53,8 @@ public class MainMenu implements Menu {
 
     private void controller(MainMenuCommand mainMenuCommandInput) {
         switch (mainMenuCommandInput) {
-            case CALCULATE -> calculationMenu.execute();
-            case MEMORY -> memoryMenu.execute();
+            case CALCULATE -> calculationMenu.executeMenu();
+            case MEMORY -> memoryMenu.executeMenu();
             case EXIT -> switchState();
         }
     }

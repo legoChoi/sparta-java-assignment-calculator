@@ -1,12 +1,13 @@
-package lv03.mainMenu.io.input;
+package lv03.mainMenu.calculationMenu.io.input;
 
 import lv03.input.Input;
+
 import java.util.Scanner;
 
-public class mainMenuInput implements Input {
+public class CalculationMenuInput implements Input {
     private final Scanner scanner;
 
-    public mainMenuInput(Scanner scanner) {
+    public CalculationMenuInput(Scanner scanner) {
         this.scanner = scanner;
     }
 
