@@ -19,18 +19,15 @@ public class MemoryMenu implements Menu {
         this.calculatorMemory = calculatorMemory;
     }
 
-    @Override
-    public boolean getState() {
+    private boolean getState() {
         return state;
     }
 
-    @Override
-    public void switchState() {
+    private void switchState() {
         state = !state;
     }
 
-    @Override
-    public void showMenu(String menu) {
+    private void showMenu(String menu) {
         calculatorOutput.printMenu(menu);
     }
 

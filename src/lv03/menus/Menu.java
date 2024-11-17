@@ -1,8 +1,8 @@
 package lv03.menus;
 
 public interface Menu {
-    void showMenu(String menu);
     void execute();
-    boolean getState();
-    void switchState();
+//    void showMenu(String menu);
+//    boolean getState();
+//    void switchState();
 }
