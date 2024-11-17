@@ -1,6 +1,6 @@
 package lv03.validator;
 
-import lv03.enums.OperatorType;
+import lv03.mainMenu.calculationMenu.models.enums.OperatorType;
 
 public class OperatorValidator implements Validator {
     @Override

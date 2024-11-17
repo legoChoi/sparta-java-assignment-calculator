@@ -1,8 +1,8 @@
 package lv03;
 
 import lv03.dto.CalculatorInputDto;
-import lv03.enums.OperatorType;
-import lv03.exceptions.NotValidOperatorInputException;
+import lv03.mainMenu.calculationMenu.models.enums.OperatorType;
+import lv03.commons.exceptions.NotValidOperatorInputException;
 
 public class ArithmeticCalculator{
     public double calculate(CalculatorInputDto calculatorInputDto) {

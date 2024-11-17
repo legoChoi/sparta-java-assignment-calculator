@@ -1,6 +1,6 @@
-package lv03.Memory;
+package lv03.memory;
 
-import lv03.exceptions.MemoryEmptyException;
+import lv03.commons.exceptions.MemoryEmptyException;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -18,4 +18,9 @@ public class CalculatorOutput implements Output {
     public void printMemory(List<Double> memory) {
         System.out.println(memory);
     }
+
+    @Override
+    public void printSysMessage(String msg) {
+        System.out.println(msg);
+    }
 }

@@ -1,9 +1,10 @@
-package lv03.menus;
+package lv03.mainMenu.memoryMenu;
 
-import lv03.Memory.Memory;
-import lv03.enums.MemoryMenuCommandLine;
-import lv03.exceptions.MemoryEmptyException;
-import lv03.exceptions.NotValidCommandInputException;
+import lv03.interfaces.Menu;
+import lv03.memory.Memory;
+import lv03.mainMenu.memoryMenu.models.enums.MemoryMenuCommandLine;
+import lv03.commons.exceptions.MemoryEmptyException;
+import lv03.commons.exceptions.NotValidCommandInputException;
 import lv03.input.Input;
 import lv03.output.Output;
 

@@ -1,6 +1,6 @@
 package lv03.validator;
 
-import lv03.enums.MainMenuCommandLine;
+import lv03.mainMenu.models.enums.MainMenuCommandLine;
 
 public class MainMenuCommandValidator implements Validator {
     @Override

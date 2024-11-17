@@ -1,8 +1,9 @@
-package lv03.menus;
+package lv03.mainMenu;
 
-import lv03.enums.MainMenuCommandLine;
-import lv03.exceptions.NotValidCommandInputException;
+import lv03.mainMenu.models.enums.MainMenuCommandLine;
+import lv03.commons.exceptions.NotValidCommandInputException;
 import lv03.input.Input;
+import lv03.interfaces.Menu;
 import lv03.output.Output;
 
 public class MainMenu implements Menu {

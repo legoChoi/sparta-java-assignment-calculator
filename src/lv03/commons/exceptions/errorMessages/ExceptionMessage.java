@@ -1,4 +1,4 @@
-package lv03.enums;
+package lv03.commons.exceptions.errorMessages;
 
 public enum ExceptionMessage {
     NOT_VALID_COMMAND_INPUT_EXCEPTION("[유효하지 않은 명령어입니다.]"),

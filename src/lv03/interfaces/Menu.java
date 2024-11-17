@@ -1,4 +1,4 @@
-package lv03.menus;
+package lv03.interfaces;
 
 public interface Menu {
     void execute();
