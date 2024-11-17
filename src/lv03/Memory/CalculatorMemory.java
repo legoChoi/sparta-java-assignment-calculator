@@ -1,5 +1,7 @@
 package lv03.Memory;
 
+import lv03.exceptions.MemoryEmptyException;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,7 +22,7 @@ public class CalculatorMemory implements Memory<Double> {
 
     @Override
     public List<Double> deleteFirst() {
-//        if (resultList.isEmpty()) return false; // exception
+        if (resultList.isEmpty()) throw new MemoryEmptyException();
 
         resultList.removeFirst();
         return getMemory();
