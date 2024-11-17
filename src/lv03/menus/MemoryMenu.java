@@ -2,6 +2,7 @@ package lv03.menus;
 
 import lv03.Memory.Memory;
 import lv03.enums.MemoryMenuCommandLine;
+import lv03.exceptions.MemoryEmptyException;
 import lv03.exceptions.NotValidCommandInputException;
 import lv03.input.Input;
 import lv03.output.Output;
@@ -45,7 +46,7 @@ public class MemoryMenu implements Menu {
             try {
                 MemoryMenuCommandLine mainMenuCommandLine = MemoryMenuCommandLine.findByIndexOrCommand(commandInput);
                 controller(mainMenuCommandLine);
-            } catch (NotValidCommandInputException e) {
+            } catch (NotValidCommandInputException | MemoryEmptyException e) {
                 calculatorOutput.printErrMessage(e.getMessage());
             }
         }
