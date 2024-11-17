@@ -1,6 +1,4 @@
-package lv03.Input;
-
-import java.util.Scanner;
+package lv03.input;
 
 public interface Input {
     String input();

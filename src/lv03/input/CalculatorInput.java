@@ -1,4 +1,4 @@
-package lv03.Input;
+package lv03.input;
 
 import java.util.Scanner;
 
