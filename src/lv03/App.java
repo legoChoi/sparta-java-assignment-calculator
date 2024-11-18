@@ -11,6 +11,7 @@ import lv03.memory.Memory;
 import lv03.io.output.CalculatorOutput;
 import lv03.io.output.Output;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -18,7 +19,7 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         Input calculatorInput = new CalculatorInput(scanner);
         Output calculatorOutput = new CalculatorOutput();
-        Memory<Double> calculatorMemory = new CalculatorMemory();
+        Memory<List<Double>, Double> calculatorMemory = new CalculatorMemory();
 
         new Calculator(
                 new MainMenu(

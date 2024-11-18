@@ -6,7 +6,7 @@ import lv03.commons.exceptions.errorMessages.ExceptionMessage;
 import java.util.LinkedList;
 import java.util.List;
 
-public class CalculatorMemory implements Memory<Double> {
+public class CalculatorMemory implements Memory<List<Double>, Double> {
     private final LinkedList<Double> resultList = new LinkedList<>();
 
     @Override
