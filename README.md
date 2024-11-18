@@ -23,3 +23,6 @@
 - Enum을 활용한 연산 타입 정의
 - 저장된 데이터 중 보다 큰 결과값들 출력
 
+
+![계산기 클래스 다이어그램](https://github.com/legoChoi/sparta-java-assignment-calculator/blob/dev/계산기%20클래스%20다이어그램.png)
+
