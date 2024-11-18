@@ -1,4 +1,4 @@
-package lv03.io.input;
+package lv03.shared.io.input;
 
 import java.util.Scanner;
 

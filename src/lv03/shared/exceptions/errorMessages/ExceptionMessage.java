@@ -1,4 +1,4 @@
-package lv03.commons.exceptions.errorMessages;
+package lv03.shared.exceptions.errorMessages;
 
 public enum ExceptionMessage {
     NOT_VALID_NUMBER_INPUT_EXCEPTION(">> Exception: 유효하지 않은 숫자입니다."),

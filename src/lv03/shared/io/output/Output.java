@@ -1,4 +1,4 @@
-package lv03.io.output;
+package lv03.shared.io.output;
 
 public interface Output {
     void printMenu(String input);

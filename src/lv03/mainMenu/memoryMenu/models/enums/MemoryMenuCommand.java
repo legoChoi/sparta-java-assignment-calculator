@@ -1,6 +1,6 @@
 package lv03.mainMenu.memoryMenu.models.enums;
 
-import lv03.commons.exceptions.NotValidCommandInputException;
+import lv03.shared.exceptions.NotValidCommandInputException;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;

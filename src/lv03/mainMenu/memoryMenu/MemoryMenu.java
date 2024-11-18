@@ -1,12 +1,12 @@
 package lv03.mainMenu.memoryMenu;
 
-import lv03.interfaces.Menu;
-import lv03.memory.Memory;
+import lv03.shared.interfaces.Menu;
+import lv03.shared.memory.Memory;
 import lv03.mainMenu.memoryMenu.models.enums.MemoryMenuCommand;
-import lv03.commons.exceptions.MemoryEmptyException;
-import lv03.commons.exceptions.NotValidCommandInputException;
-import lv03.io.input.Input;
-import lv03.io.output.Output;
+import lv03.shared.exceptions.MemoryEmptyException;
+import lv03.shared.exceptions.NotValidCommandInputException;
+import lv03.shared.io.input.Input;
+import lv03.shared.io.output.Output;
 
 import java.util.List;
 

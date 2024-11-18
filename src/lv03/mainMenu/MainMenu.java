@@ -1,10 +1,10 @@
 package lv03.mainMenu;
 
 import lv03.mainMenu.models.enums.MainMenuCommand;
-import lv03.commons.exceptions.NotValidCommandInputException;
-import lv03.io.input.Input;
-import lv03.interfaces.Menu;
-import lv03.io.output.Output;
+import lv03.shared.exceptions.NotValidCommandInputException;
+import lv03.shared.io.input.Input;
+import lv03.shared.interfaces.Menu;
+import lv03.shared.io.output.Output;
 
 public class MainMenu implements Menu {
     private boolean state = true;
