@@ -15,14 +15,9 @@ public enum MemoryMenuCommand {
     private final String command;
     private final String index;
 
-    MemoryMenuCommand(String command, String index) {
+    private MemoryMenuCommand(String command, String index) {
         this.command = command;
         this.index = index;
-    }
-
-    public static boolean isCommand(String input) {
-        return Arrays.stream(values())
-                .anyMatch(e -> e.command.equals(input));
     }
 
     public static String getMemoryMenuList() {
@@ -31,9 +26,9 @@ public enum MemoryMenuCommand {
                 .collect(Collectors.joining("\n"));
     }
 
-    public static MemoryMenuCommand findByIndexOrCommand(String command) {
+    public static MemoryMenuCommand findByIndexOrCommand(String commandInput) {
         return Arrays.stream(values())
-                .filter(e -> e.command.equals(command) || e.index.equals(command))
+                .filter(e -> e.command.equals(commandInput) || e.index.equals(commandInput))
                 .findAny()
                 .orElseThrow(NotValidCommandInputException::new);
     }

@@ -21,19 +21,14 @@ public enum OperatorCommand {
     private final String operator;
     private final BiFunction<Double, Double, Double> calculation;
 
-    OperatorCommand(String operator, BiFunction<Double, Double, Double> calculation) {
+    private OperatorCommand(String operator, BiFunction<Double, Double, Double> calculation) {
         this.operator = operator;
         this.calculation = calculation;
     }
 
-    public static boolean isOperator(String input) {
+    public static OperatorCommand find(String commandInput) {
         return Arrays.stream(values())
-                .anyMatch(e -> e.operator.equals(input));
-    }
-
-    public static OperatorCommand find(String operator) {
-        return Arrays.stream(values())
-                .filter(e -> e.operator.equals(operator))
+                .filter(e -> e.operator.equals(commandInput))
                 .findAny()
                 .orElseThrow(NotValidOperatorInputException::new);
     }
