@@ -19,7 +19,7 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         Input calculatorInput = new CalculatorInput(scanner);
         Output calculatorOutput = new CalculatorOutput();
-        Memory<Double> calculatorMemory = new CalculatorMemory();
+        Memory<List<Double>, Double> calculatorMemory = new CalculatorMemory();
 
         new Calculator(
                 new MainMenu(
