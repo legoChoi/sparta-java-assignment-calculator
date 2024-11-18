@@ -1,4 +1,4 @@
-package lv03.output;
+package lv03.io.output;
 
 import java.util.List;
 

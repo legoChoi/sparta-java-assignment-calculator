@@ -20,28 +20,20 @@ public enum MemoryMenuCommand {
         this.index = index;
     }
 
-    public static String getMemoryMenuList() {
-        return Arrays.stream(values())
-                .map(command -> command.getIndex() + " | " + command.getCommand())
-                .collect(Collectors.joining("\n"));
-    }
-
-    public String getCommand() {
-        return command;
-    }
-
-    public String getIndex() {
-        return index;
-    }
-
     public static boolean isCommand(String input) {
         return Arrays.stream(values())
                 .anyMatch(e -> e.command.equals(input));
     }
 
+    public static String getMemoryMenuList() {
+        return Arrays.stream(values())
+                .map(e -> e.index + " | " + e.command)
+                .collect(Collectors.joining("\n"));
+    }
+
     public static MemoryMenuCommand findByIndexOrCommand(String command) {
         return Arrays.stream(values())
-                .filter(v -> v.getCommand().equals(command) || v.getIndex().equals(command))
+                .filter(e -> e.command.equals(command) || e.index.equals(command))
                 .findAny()
                 .orElseThrow(NotValidCommandInputException::new);
     }

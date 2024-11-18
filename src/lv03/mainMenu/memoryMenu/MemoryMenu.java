@@ -1,13 +1,12 @@
 package lv03.mainMenu.memoryMenu;
 
-import lv03.commons.exceptions.errorMessages.ExceptionMessage;
 import lv03.interfaces.Menu;
 import lv03.memory.Memory;
 import lv03.mainMenu.memoryMenu.models.enums.MemoryMenuCommand;
 import lv03.commons.exceptions.MemoryEmptyException;
 import lv03.commons.exceptions.NotValidCommandInputException;
-import lv03.input.Input;
-import lv03.output.Output;
+import lv03.io.input.Input;
+import lv03.io.output.Output;
 
 public class MemoryMenu implements Menu {
     private boolean state = true;
@@ -44,7 +43,7 @@ public class MemoryMenu implements Menu {
 
             try {
                 MemoryMenuCommand mainMenuCommand = MemoryMenuCommand.findByIndexOrCommand(memoryMenuCommandInput);
-                controller(mainMenuCommand);
+                menuBranch(mainMenuCommand);
             } catch (NotValidCommandInputException | MemoryEmptyException | NumberFormatException e) {
                 calculatorOutput.printErrMessage(e.getMessage());
             }
@@ -53,7 +52,7 @@ public class MemoryMenu implements Menu {
         switchState(); // memory 메뉴에 재진입 할 수 있도록 상태 복구
     }
 
-    private void controller(MemoryMenuCommand memoryMenuCommandInput) {
+    private void menuBranch(MemoryMenuCommand memoryMenuCommandInput) {
         switch (memoryMenuCommandInput) {
             case SHOW -> calculatorOutput.printMemory(calculatorMemory.getMemory());
             case DELETE_FIRST -> calculatorOutput.printMemory(calculatorMemory.deleteFirst());
