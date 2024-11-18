@@ -1,7 +1,6 @@
 package lv03.mainMenu.models.enums;
 
 import lv03.commons.exceptions.NotValidCommandInputException;
-import lv03.mainMenu.models.dto.MainMenuInputDto;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -14,14 +13,9 @@ public enum MainMenuCommand {
     private final String command;
     private final String index;
 
-    MainMenuCommand(String command, String index) {
+    private MainMenuCommand(String command, String index) {
         this.command = command;
         this.index = index;
-    }
-
-    public static boolean isCommand(String input) {
-        return Arrays.stream(values())
-                .anyMatch(e -> e.command.equals(input));
     }
 
     public static String getMainMenuList() {

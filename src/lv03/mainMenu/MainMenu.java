@@ -13,9 +13,9 @@ public class MainMenu implements Menu {
     private final Menu memoryMenu;
     private final Menu calculationMenu;
 
-    public MainMenu(Input input, Output output, Menu memoryMenu, Menu calculationMenu) {
-        this.calculatorInput = input;
-        this.calculatorOutput = output;
+    public MainMenu(Input calculatorInput, Output calculatorOutput, Menu memoryMenu, Menu calculationMenu) {
+        this.calculatorInput = calculatorInput;
+        this.calculatorOutput = calculatorOutput;
         this.memoryMenu = memoryMenu;
         this.calculationMenu = calculationMenu;
     }
@@ -36,7 +36,6 @@ public class MainMenu implements Menu {
     public void executeMenu() {
         String mainMenuList = MainMenuCommand.getMainMenuList();
         String mainMenuCommandInput;
-
 
         while (getState()) {
             showMenu(mainMenuList);

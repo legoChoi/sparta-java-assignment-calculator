@@ -9,11 +9,11 @@ import lv03.io.output.Output;
 
 public class ArithmeticCalculator{
     private final Output calculatorOutput;
-    private final Memory<Double> memory;
+    private final Memory<Double> calculatorMemory;
 
-    public ArithmeticCalculator(Output calculatorOutput, Memory<Double> memory) {
+    public ArithmeticCalculator(Output calculatorOutput, Memory<Double> calculatorMemory) {
         this.calculatorOutput = calculatorOutput;
-        this.memory = memory;
+        this.calculatorMemory = calculatorMemory;
     }
 
     public void calculate(CalculatorInputDto calculatorInputDto) {
@@ -22,7 +22,7 @@ public class ArithmeticCalculator{
 
             double result = operator.calculate(calculatorInputDto.firstOperand(), calculatorInputDto.secondOperand());
 
-            calculatorOutput.printMemory(memory.save(result));
+            calculatorOutput.printMemory(calculatorMemory.save(result));
         } catch (NotValidOperatorInputException e) {
             throw new NotValidOperatorInputException();
         } catch (ArithmeticException e) {
