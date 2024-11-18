@@ -1,6 +1,6 @@
 package lv03.io.output;
 
-import java.util.List;
+import java.util.Collection;
 
 public class CalculatorOutput implements Output {
     @Override
@@ -16,7 +16,7 @@ public class CalculatorOutput implements Output {
     }
 
     @Override
-    public void printMemory(List<Double> memory) {
+    public <T> void printMemory(Collection<T> memory) {
         System.out.println();
         System.out.println(">> " + memory);
     }

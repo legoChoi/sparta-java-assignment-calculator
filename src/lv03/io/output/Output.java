@@ -1,10 +1,10 @@
 package lv03.io.output;
 
-import java.util.List;
+import java.util.Collection;
 
 public interface Output {
     void printMenu(String input);
     void printErrMessage(String msg);
-    void printMemory(List<Double> memory);
+    <T> void printMemory(Collection<T> memory);
     void printSysMessage(String msg);
 }

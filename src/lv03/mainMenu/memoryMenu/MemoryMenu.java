@@ -8,15 +8,13 @@ import lv03.commons.exceptions.NotValidCommandInputException;
 import lv03.io.input.Input;
 import lv03.io.output.Output;
 
-import java.util.List;
-
 public class MemoryMenu implements Menu {
     private boolean state = true;
     private final Input calculatorInput;
     private final Output calculatorOutput;
-    private final Memory<List<Double>, Double> calculatorMemory;
+    private final Memory<Double> calculatorMemory;
 
-    public MemoryMenu(Input calculatorInput, Output calculatorOutput, Memory<List<Double>, Double> calculatorMemory) {
+    public MemoryMenu(Input calculatorInput, Output calculatorOutput, Memory<Double> calculatorMemory) {
         this.calculatorInput = calculatorInput;
         this.calculatorOutput = calculatorOutput;
         this.calculatorMemory = calculatorMemory;
