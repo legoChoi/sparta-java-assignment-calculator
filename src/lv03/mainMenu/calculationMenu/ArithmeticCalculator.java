@@ -7,11 +7,13 @@ import lv03.commons.exceptions.NotValidOperatorInputException;
 import lv03.memory.Memory;
 import lv03.io.output.Output;
 
+import java.util.List;
+
 public class ArithmeticCalculator{
     private final Output calculatorOutput;
-    private final Memory<Double> calculatorMemory;
+    private final Memory<List<Double>, Double> calculatorMemory;
 
-    public ArithmeticCalculator(Output calculatorOutput, Memory<Double> calculatorMemory) {
+    public ArithmeticCalculator(Output calculatorOutput, Memory<List<Double>, Double> calculatorMemory) {
         this.calculatorOutput = calculatorOutput;
         this.calculatorMemory = calculatorMemory;
     }
