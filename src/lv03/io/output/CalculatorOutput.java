@@ -1,7 +1,5 @@
 package lv03.io.output;
 
-import java.util.Collection;
-
 public class CalculatorOutput implements Output {
     @Override
     public void printMenu(String input) {
@@ -16,7 +14,7 @@ public class CalculatorOutput implements Output {
     }
 
     @Override
-    public <T> void printMemory(Collection<T> memory) {
+    public <T> void printMemory(T memory) {
         System.out.println();
         System.out.println(">> " + memory);
     }
