@@ -1,7 +1,7 @@
 package lv03.mainMenu.calculationMenu.models.enums;
 
-import lv03.commons.exceptions.errorMessages.ExceptionMessage;
-import lv03.commons.exceptions.NotValidOperatorInputException;
+import lv03.shared.exceptions.errorMessages.ExceptionMessage;
+import lv03.shared.exceptions.NotValidOperatorInputException;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;

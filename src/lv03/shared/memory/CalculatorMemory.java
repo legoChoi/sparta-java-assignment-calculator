@@ -1,7 +1,7 @@
-package lv03.memory;
+package lv03.shared.memory;
 
-import lv03.commons.exceptions.MemoryEmptyException;
-import lv03.commons.exceptions.errorMessages.ExceptionMessage;
+import lv03.shared.exceptions.MemoryEmptyException;
+import lv03.shared.exceptions.errorMessages.ExceptionMessage;
 
 import java.util.LinkedList;
 import java.util.List;

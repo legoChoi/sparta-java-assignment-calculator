@@ -1,11 +1,11 @@
 package lv03.mainMenu.calculationMenu;
 
-import lv03.commons.exceptions.errorMessages.ExceptionMessage;
+import lv03.shared.exceptions.errorMessages.ExceptionMessage;
 import lv03.mainMenu.calculationMenu.models.dto.CalculatorInputDto;
 import lv03.mainMenu.calculationMenu.models.enums.OperatorCommand;
-import lv03.commons.exceptions.NotValidOperatorInputException;
-import lv03.memory.Memory;
-import lv03.io.output.Output;
+import lv03.shared.exceptions.NotValidOperatorInputException;
+import lv03.shared.memory.Memory;
+import lv03.shared.io.output.Output;
 
 import java.util.List;
 

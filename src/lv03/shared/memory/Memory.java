@@ -1,4 +1,4 @@
-package lv03.memory;
+package lv03.shared.memory;
 
 public interface Memory<T, K> {
     T getMemory();           // 메모리에서 값들을 보여줌

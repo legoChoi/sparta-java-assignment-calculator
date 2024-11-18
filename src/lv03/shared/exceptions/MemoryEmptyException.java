@@ -1,6 +1,6 @@
-package lv03.commons.exceptions;
+package lv03.shared.exceptions;
 
-import lv03.commons.exceptions.errorMessages.ExceptionMessage;
+import lv03.shared.exceptions.errorMessages.ExceptionMessage;
 
 public class MemoryEmptyException extends RuntimeException {
     public MemoryEmptyException() {
