@@ -2,9 +2,9 @@ package lv03.mainMenu;
 
 import lv03.mainMenu.models.enums.MainMenuCommand;
 import lv03.commons.exceptions.NotValidCommandInputException;
-import lv03.input.Input;
+import lv03.io.input.Input;
 import lv03.interfaces.Menu;
-import lv03.output.Output;
+import lv03.io.output.Output;
 
 public class MainMenu implements Menu {
     private boolean state = true;
@@ -44,14 +44,14 @@ public class MainMenu implements Menu {
 
             try {
                 MainMenuCommand mainMenuCommand = MainMenuCommand.findByIndexOrCommand(mainMenuCommandInput);
-                controller(mainMenuCommand);
+                menuBranch(mainMenuCommand);
             } catch (NotValidCommandInputException e) {
                 calculatorOutput.printErrMessage(e.getMessage());
             }
         }
     }
 
-    private void controller(MainMenuCommand mainMenuCommandInput) {
+    private void menuBranch(MainMenuCommand mainMenuCommandInput) {
         switch (mainMenuCommandInput) {
             case CALCULATE -> calculationMenu.executeMenu();
             case MEMORY -> memoryMenu.executeMenu();

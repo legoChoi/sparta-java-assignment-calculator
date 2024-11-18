@@ -19,28 +19,20 @@ public enum MainMenuCommand {
         this.index = index;
     }
 
-    public static String getMainMenuList() {
-        return Arrays.stream(values())
-                .map(command -> command.getIndex() + " | " + command.getCommand())
-                .collect(Collectors.joining("\n"));
-    }
-
-    public String getIndex() {
-        return index;
-    }
-
-    public String getCommand() {
-        return command;
-    }
-
     public static boolean isCommand(String input) {
         return Arrays.stream(values())
                 .anyMatch(e -> e.command.equals(input));
     }
 
+    public static String getMainMenuList() {
+        return Arrays.stream(values())
+                .map(e -> e.index + " | " + e.command)
+                .collect(Collectors.joining("\n"));
+    }
+
     public static MainMenuCommand findByIndexOrCommand(String commandInput) {
         return Arrays.stream(values())
-                .filter(v -> v.getCommand().equals(commandInput) || v.getIndex().equals(commandInput))
+                .filter(e -> e.command.equals(commandInput) || e.index.equals(commandInput))
                 .findAny()
                 .orElseThrow(NotValidCommandInputException::new);
     }

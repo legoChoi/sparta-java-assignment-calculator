@@ -26,23 +26,19 @@ public enum OperatorCommand {
         this.calculation = calculation;
     }
 
-    public String getOperator() {
-        return operator;
-    }
-
     public static boolean isOperator(String input) {
         return Arrays.stream(values())
-                .anyMatch(op -> op.getOperator().equals(input));
-    }
-
-    public double calculate(double firstOperand, double secondOperand) {
-            return calculation.apply(firstOperand, secondOperand);
+                .anyMatch(e -> e.operator.equals(input));
     }
 
     public static OperatorCommand find(String operator) {
         return Arrays.stream(values())
-                .filter(v -> v.operator.equals(operator))
+                .filter(e -> e.operator.equals(operator))
                 .findAny()
                 .orElseThrow(NotValidOperatorInputException::new);
+    }
+
+    public double calculate(double firstOperand, double secondOperand) {
+        return calculation.apply(firstOperand, secondOperand);
     }
 }

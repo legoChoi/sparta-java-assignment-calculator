@@ -5,7 +5,7 @@ import lv03.mainMenu.calculationMenu.models.dto.CalculatorInputDto;
 import lv03.mainMenu.calculationMenu.models.enums.OperatorCommand;
 import lv03.commons.exceptions.NotValidOperatorInputException;
 import lv03.memory.Memory;
-import lv03.output.Output;
+import lv03.io.output.Output;
 
 public class ArithmeticCalculator{
     private final Output calculatorOutput;

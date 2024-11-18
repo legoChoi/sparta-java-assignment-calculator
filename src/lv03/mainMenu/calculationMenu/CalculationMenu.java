@@ -4,9 +4,8 @@ import lv03.commons.exceptions.NotValidOperatorInputException;
 import lv03.commons.exceptions.errorMessages.ExceptionMessage;
 import lv03.interfaces.Menu;
 import lv03.mainMenu.calculationMenu.models.dto.CalculatorInputDto;
-import lv03.memory.Memory;
-import lv03.input.Input;
-import lv03.output.Output;
+import lv03.io.input.Input;
+import lv03.io.output.Output;
 
 public class CalculationMenu implements Menu {
     private boolean state = true;

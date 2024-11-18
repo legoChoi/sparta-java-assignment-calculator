@@ -1,4 +1,4 @@
-package lv03.input;
+package lv03.io.input;
 
 public interface Input {
     String input();
