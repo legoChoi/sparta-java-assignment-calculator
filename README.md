@@ -25,7 +25,15 @@
 - 저장된 데이터 중 보다 큰 결과값 들 출력
 - 명령어 입력은 영어, 숫자 둘 다 가능
 - 잘못된 입력, 파싱 등 예외 처리
+---
+가능한 연산
 
+- 더하기 연산
+- 뺴기 연산
+- 곱하기 연산
+- 제곱 연산
+- 나누기 연산
+- 나머지 연산
 ---
 ### 클래스 다이어그램
 ![계산기 클래스 다이어그램](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcddDGp%2FbtsKMgkk8u8%2FhhMkK6a8ivDLfHfPlzaSB0%2Fimg.png)
